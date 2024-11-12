@@ -6,7 +6,7 @@ body {
     align-items: center;
     justify-content: space-between;
     background-color: #2e3440;
-    background-image: url("rect2.png");
+    background-image: url("graphics/bg.png");
 }
 
 div {
