@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>milo's homepage</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+<table class="main">
+<tr>
+    <th>
+        <div class="navbar">
+            <h2>-- NAVBAR --</h2>
+            <a href="index.html">home</a>
+            <a href="art.html">art</a>
+        </div>
+        <div class="navbar">
+            <h2>-- SOCIAL --</h2>
+            <a href="https://bsky.app/profile/milobit.net">bluesky</a>
+            <a href="https://www.youtube.com/@milo3733">youtube</a>
+            <a href="https://www.artstation.com/olimasil">artstation</a>
+            <p class="line"><b>discord:</b> @milo28</p>
+        </div>
+    </th>
+    <td>
+        <div>
+            <div class="splash-text">
+                <span>
+                    <span id="random-text" class=>boo javascript!</span>
+                </span>
+            </div>
+            <h1>-- HOME PAGE --</h1>
+            <p>
+                <div class="paper", style="rotate:4deg">
+                    <img src="1.png" alt="milo's webbed site" style="width:128px">
+                </div>
+                <h3>welcome!</h3>
+                to my homepage. I'm milo, a hobbyist artist and programmer.
+                I primarily post my artwork on <a href="https://bsky.app/profile/milobit.net">bluesky</a>.
+            </p>
+            <p>
+                If blender modeling timelapses set to questionable music choices are more your thing, allow me to direct you to my
+                <a href="https://www.youtube.com/@milo3733">youtube channel</a>.
+            </p>
+        </div>
+        <div style="width:200px">
+            <h1>-- ME --</h1>
+            <p>
+                <b>pronouns:</b> he/him<br>
+                <b>location:</b> USA<br>
+                <b>uptime:</b> 20 yrs<br>
+                <b>vehicle:</b> volvo 245<br>
+                <b>text editor:</b> nvim<br>
+            </p>
+        </div>
+    </td>
+</tr>
+</table>
+<footer>
+    <p>milobit.net - est 2024</p>
+</footer>
+<script>
+    var texts = [
+        ":(){ :|:& };:", "trans rights are human rights!", "minecraft reference", "best viewed with netscape navigator 4.0 or below",
+        "the bee's knees", "the world's best website, some say", "it's not easy to get a div over here",
+        "brought to you by a series of tubes", "if you can read this, you have javascript enabled", "the website of all time",
+        "the last website you'll ever need", "have a nice day!", "click <a href='you-win.html'>the answer</a>", "rock and roll! and stone"
+    ];
+    document.getElementById("random-text").innerHTML = texts[Math.floor(Math.random()*texts.length)];
+</script>
+</body>
+</html>
