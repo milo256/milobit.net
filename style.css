@@ -137,9 +137,12 @@ ul.vnav > :not(:last-child) {
     animation-timing-function: ease-in;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 640px) {
     .splash-text {
         rotate: 5deg;
+        width: 160px;
+        top: 18px;
+        right: -10px;
     }
 }
 
