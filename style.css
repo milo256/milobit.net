@@ -120,6 +120,7 @@ ul.vnav > :not(:last-child) {
 }
 
 .splash-text {
+    z-index: 1;
     color: #ebcb8b;
     display: inline-block;
     position: absolute;
