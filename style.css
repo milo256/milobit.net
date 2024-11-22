@@ -20,6 +20,11 @@ h1, h2 {
     text-wrap: nowrap;
 }
 
+h1.inline, h2.inline {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
 h1::before, h2::before { content: "-- "; }
 h1::after, h2::after { content: " --"; }
 
@@ -101,14 +106,27 @@ ul.plain {
     padding: 0;
 }
 
-ul.vnav {
+ul.vnav, ul.hnav {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
+ul.hnav {
+    display: flex;
+}
+
 ul.vnav > :not(:last-child) {
     border-bottom: 1px solid #4C566A;
+}
+
+ul.hnav > * {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+ul.hnav > :not(:last-child) {
+    border-right: 1px solid #4C566A;
 }
 
 @keyframes splash {

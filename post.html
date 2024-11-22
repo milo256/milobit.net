@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>milo's homepage</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+    <div style="width: 900px">
+        <div class="window" style="display:inline-block; margin-bottom: 0;">
+            <ul class="hnav">
+                <h2 class="inline">Navbar</h2>
+                <li><a href="/">home</a></li>
+                <li><a href="art.html">art</a></li>
+            </ul>
+        </div>
+        <div class="window">
+            <ul class="hnav", style="position:absolute; right: 0">
+                <li><a>← previous</a></li>
+                <li><a>next →</a></li>
+            </ul>
+            <h2>Saab Gripen</h2>
+            <a href="artwork/gripen.png">
+                <img src="artwork/gripen.png" style="margin-top: 3px; width: 100%">
+            </a>
+            <ul class="hnav">
+                <li>Oct 24</li>
+                <li><b>uploaded: </b>Nov 24</li>
+            </ul>
+        </div>
+    </div>
+</table>
+<footer>
+    <p>milobit.net - est 2024</p>
+</footer>
+<script>
+    var texts = [
+        ":(){ :|:& };:", "trans rights are human rights!", "minecraft reference", "best viewed with netscape navigator 4.0 or below",
+        "the bee's knees", "the world's best website, some say", "made with only ethically sourced HTML",
+        "brought to you by a series of tubes", "if you can read this, you have javascript enabled", "the website of all time",
+        "the last website you'll ever need", "have a nice day!", "click <a href='you-win.html'>the answer</a>", "rock and roll! and stone",
+        "<a href='https://github.com/milo256/milobit.net'>free and open source!</a>", "or as i've taken to calling it, GNU + Linux",
+        "100% human-made!", "guaranteed!",
+    ];
+    document.getElementById("random-text").innerHTML = texts[Math.floor(Math.random()*texts.length)];
+</script>
+</body>
+</html>
