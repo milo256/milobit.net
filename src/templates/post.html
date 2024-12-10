@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title><--field --name="title"></title>
+<link rel="stylesheet" href='<--field --name="root">/style.css'>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+    <div style="width: 900px">
+        <div class="window" style="display:inline-block; margin-bottom: 0;">
+            <ul class="hnav">
+                <h2 class="inline">Navbar</h2>
+                <li><a href="/">home</a></li>
+                <li><a href="/art/index.html">art</a></li>
+            </ul>
+        </div>
+        <div class="window">
+            <ul class="hnav", style="position:absolute; right: 0">
+                <li><a href="<--field --name="previous">">← previous</a></li>
+                <li><a href="<--field --name="next">">next →</a></li>
+            </ul>
+            <h2><--field --name="title"></h2>
+            <--inner-html>
+        </div>
+    </div>
+</table>
+<footer>
+    <p>milobit.net - est 2024</p>
+</footer>
+</body>
+</html>
