@@ -53,7 +53,6 @@ div.window, div.paper {
     text-align: left;
     margin: 8px 4px;
     padding: 0px 5px 3px;
-    border-radius: 1px;
     box-shadow: 5px 5px #20242D;
 }
 
@@ -79,7 +78,6 @@ div.paper > img {
     background-color: #434c5e;
     border: 1px solid #20242D;
     margin-top: 5px;
-    border-radius: 1px;
 }
 
 table.main {
