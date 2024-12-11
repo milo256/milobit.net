@@ -53,7 +53,7 @@ div.window, div.paper {
     text-align: left;
     margin: 8px 4px;
     padding: 0px 5px 3px;
-    box-shadow: 5px 5px #20242D;
+    box-shadow: 5px 5px #101114;
 }
 
 div.window {
@@ -65,8 +65,8 @@ div.window {
 div.paper {
     margin-left: 10px;
     display: inline-block;
-    background-color: #E5DCCA;
-    border: 1px solid #99907D;
+    background-color: #81a1c1;
+    border: 1px solid #20242D;
     color: #3b4252;
 }
 
@@ -75,7 +75,7 @@ div.window div.paper, div.window div.window {
 }
 
 div.paper > img {
-    background-color: #434c5e;
+    background-color: #d8dee9;
     border: 1px solid #20242D;
     margin-top: 5px;
 }
