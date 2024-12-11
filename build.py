@@ -165,7 +165,10 @@ def find_build_files(wd, relpath = "", dct = None):
         filerelpath = join(relpath, f)
         if isfile(filepath):
             content = ""
-            name, typ = f.split(".")
+            try:
+                name, typ = f.split(".")
+            except:
+                typ = "none"
             if (typ == "html"):
                 with open(filepath) as file:
                     content = file.read()
