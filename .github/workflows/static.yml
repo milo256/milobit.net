@@ -2,8 +2,6 @@ name: Build and deploy to pages
 
 on:
   workflow_dispatch:
-
-  Runs on pushes targeting the default branch
   push:
     branches: ["main"]
 
