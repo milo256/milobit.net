@@ -5,13 +5,16 @@
 #### OPTIONS #####
 template_path = "src/templates"
 docs_path = "src/docs"
+
+# overwritten by first argument if used
 out_path = "docs"
+
 
 #### USAGE ####
 
 # Summary:
-    # this script takes no argunments and copies site files from docs_path to
-    # out_path, using pseudo-tags to perform basic replacement operations on the
+    # this script copies site files from docs_path to out_path,
+    # using pseudo-tags to perform basic replacement operations on the
     # source documents. As not to conflict with real html tags and attributes,
     # pseudo-tags and attributes used by this script always begin with the -- prefix.
     # unlike real html, pseudo-tags and attributes are case-sensitive
@@ -60,9 +63,13 @@ out_path = "docs"
 
 import re
 import os
+import sys
 import shutil
 from os import listdir
 from os.path import isfile, join, split
+
+if len(sys.argv) >= 2:
+    out_path = sys.argv[1]
 
 class page:
     def __init__(self, relpath, typ, content):
