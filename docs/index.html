@@ -1,43 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>milo's homepage</title>
-<link rel="stylesheet" href='./style.css'>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<body>
-<table class="main">
-<tr>
-    <th>
-        <div class="window">
-            <h2>navbar</h2>
-            <ul class="vnav">
-                <li><a href="/">home</a></li>
-                <li><a href="art/index.html">art</a></li>
-            </ul>
-        </div>
-        <div class="window">
-            <h2>social</h2>
-            <ul class="vnav">
-                <li><a href="https://bsky.app/profile/milobit.net">bluesky</a></li>
-                <li><a href="https://github.com/milo256">github</a></li>
-                <li><a href="https://www.youtube.com/@milo3733">youtube</a></li>
-                <li><a href="https://milo512.tumblr.com/">tumblr</a></li>
-                <li><b>discord:</b> @milo28</li>
-            </ul>
-        </div>
-        <a href='https://milobit.net'><img src='./badge.gif'></a>
-        <a href='https://insect.christmas'><img src='./graphics/insect.christmasbutton.jpg'></a>
-        <img src='./graphics/cloud.png'>
-        <img src='./graphics/any-browser.png'>
-        <img src='./graphics/catboys-meow.webp'>
-        <img src='./graphics/make-a-website.jpg'>
-        <!-- <a href='https://www.blender.org'><img src='./graphics/blender.gif'></a> -->
-        <a href='https://neovim.io'><img src='./graphics/neovim.png'></a>
-        <a href='https://archlinux.org'><img src='./graphics/archlinux.gif'></a>
-    </th>
-    <td>
-        
+<--template --name="basic-page" --fields="title: milo's homepage; root:.">
     <div class="window">
         <span class="splash-text" id="random-text">i support your decision to disallow javascript</span>
         <h1>home page</h1>
@@ -79,14 +40,4 @@
         ];
         document.getElementById("random-text").innerHTML = texts[Math.floor(Math.random()*texts.length)];
     </script>
-
-    </td>
-</tr>
-</table>
-<footer>
-    <p>milobit.net - est 2024</p>
-</footer>
-</body>
-</html>
-
-
+</--template>

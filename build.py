@@ -3,11 +3,11 @@
 # milobit.net build script
 
 #### OPTIONS #####
-template_path = "src/templates"
-docs_path = "src/docs"
+template_path = "templates"
+docs_path = "docs"
 
 # overwritten by first argument if used
-out_path = "docs"
+out_path = "build"
 
 
 #### USAGE ####
