@@ -217,6 +217,7 @@ def build(docs_path, template_path):
     return (strcp, filecp)
 
 def save(string_copies, file_copies, out_path):
+    os.makedirs(out_path, exist_ok=True)
     unbuilt = find_existing_files(out_path)
     for copy in string_copies:
         content = copy[0]
