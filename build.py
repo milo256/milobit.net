@@ -398,6 +398,8 @@ def eprint(msg):
 
 
 def main():
+    if sys.argv[1]:
+        options.out_path = sys.argv[1]
     try:
         page_builds = create_page_builds(options.docs_path, options.template_path, options.out_path)
         for b in page_builds:
