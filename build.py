@@ -6,7 +6,6 @@ class options:
     template_path = "templates"
     docs_path = "docs"
     out_path = "build"
-    verbose = False
 
 #### USAGE ####
 
@@ -31,7 +30,7 @@ class options:
     #   template-name is filename of template to insert, .html extension omitted.
     #   field-name(1) and field-value(1) are names and values of fields defined in
     #       the template.
-    #   inner-html is any html.Sets are unordered sequences of unique values. a | b, or a.union(b), is the union of the two sets — i.e., a new set with all values found in either set. This is a class of operations called "set operations", which Python set types are equipped with.
+    #   inner-html is any html.
 
 # Defining Templates:
     # Templates are nearly ordinary html files, and should use the file extension .html.
@@ -42,9 +41,6 @@ class options:
     #
     # when the template is used, any --field tag will be replaced by the field value
     # corresponding to field-name as defined in the --fields pseudo-attribute of --template.
-    #
-    # footgun warning: unused fields aren't checked for and will be wrongly left in
-    # the final document if present.
     #
     # fields do not have to be used like normal html tags. they can be used anywhere,
     # including inside of strings or other tags.
@@ -59,20 +55,16 @@ class options:
 
 
 
-import re
-import os
-import sys
-import shutil
-import subprocess
-from os import listdir
-from os.path import isfile, join, split, getmtime
-
-
-def tput(args):
-    try: return subprocess.check_output(["tput"] + args.split()).decode('latin1')
-    except: return ""
+import re, os, sys
+import shutil, subprocess
 
 class textfmt:
+    """Collection of text formatting codes as strings"""
+
+    def tput(args):
+        try: return subprocess.check_output(["tput"] + args.split()).decode('latin1')
+        except: return ""
+
     bold = tput("bold")
     reset = tput("sgr0")
     blue = tput("setaf 4")
@@ -80,38 +72,98 @@ class textfmt:
     green = tput("setaf 2")
     red = tput("setaf 1")
 
+
 class BuildError(Exception):
-    pass
+    """An error with all context included"""
+
+    def __init__(self, doc, msg):
+        return super().__init__(f"[ {doc.path} ] {str(msg)}")
+
 
 class DocumentError(Exception):
-    pass
+    """An error that requires context"""
 
-class page:
-    def __init__(self, relpath, is_html, content, mtime):
+
+class File:
+    def __init__(self, path, relpath):
+        self.path = path
         self.relpath = relpath
-        self.is_html = is_html
-        self.html_content = content
-        self.mtime = mtime
+        self._mtime = None
 
-warnings = []
-def warn(msg):
-    warnings.append(textfmt.yellow + "Warning: " + msg + textfmt.reset)
+    @property
+    def mtime(self):
+        if not self._mtime: self._mtime = os.path.getmtime(self.path)
+        return self._mtime
 
-def print_warnings():
-    for warning in warnings:
-        print(warning);
+    def __str__(self):
+        return str(self.path)
 
-def to_build_err(doc_name, err):
-    return BuildError(f"in {doc_name}: " + str(err))
+    def __repr__(self):
+        return f"<{", ".join([attr+": "+str(getattr(self, attr)) for attr in self.__dict__])}>"
 
-def log(msg):
-    if options.verbose: print(msg)
 
-# find first innermost tag of given name in given html
-# returns: tuple of indicies (start, html_start, html_end, end)
-#          or None if the tag does not appear in the text.
-# raises DocumentError if the tag is invalid
-def get_first_innermost(tag_name, text):
+class Document(File):
+    """A pseudo-html file"""
+
+    def __init__(self, path, relpath):
+        super().__init__(path, relpath)
+        self._content = None
+
+    @property
+    def content(self):
+        if self._content: return self._content
+        with open(self.path) as file:
+            return file.read()
+
+
+class Blob(File):
+    """Any file that is not a Document"""
+
+    pass
+    
+
+class PageBuild:
+    """A page to build"""
+
+    def __init__(self, src, out_path, replace, templates):
+        """Create PageBuild
+        
+        - src: source Document or Blob
+        - replace: Document or Blob to replace, or None if new
+        - templates: Templates used in the src (dictionary)
+        """
+        self.src = src; self.out_path = out_path
+        self.replace = replace; self.templates = templates
+        if type(self.src) == Document and self.templates:
+            self.processed = None
+
+    def __str__(self):
+        file = str(self.src.relpath)
+        string = f"{file}"
+        if self.replace: string += f"{textfmt.blue} -> {textfmt.reset}{str(self.replace)}"
+        else: string += f"{textfmt.green} [new]{textfmt.reset}"
+        if self.templates: string += f" {textfmt.blue}with:{textfmt.reset} {str(list(self.templates.keys()))}"
+        return string
+
+class warn:
+    """Stores and prints warnings"""
+
+    stack = []
+    def __new__(cls, msg):
+        cls.stack.append(f"{textfmt.yellow}Warning: {msg}{textfmt.reset}")
+    @classmethod
+    def print(cls):
+        while warn.stack: print(warn.stack.pop())
+
+
+def find_tag(tag_name, text):
+    """Find innermost first tag of given name in given html text
+
+    RETURN: tuple of indicies (start, html_start, html_end, end)
+             or None if the tag does not appear in the text.
+    EXCEPTIONS: DocumentError if the tag is invalid
+    """
+
     start, html_start, html_end, end = (0, 0, 0, 0)
     while True:
         match = re.search("</?" + tag_name, text[html_start:])
@@ -120,7 +172,8 @@ def get_first_innermost(tag_name, text):
             else: raise DocumentError("opening tag with no matching close")
 
         new_start = match.span()[0] + html_start
-        new_html_start = text.index(">", new_start) + 1
+        try: new_html_start = text.index(">", new_start) + 1
+        except ValueError: raise DocumentError("missing `>`")
 
         if text[new_start + 1] == '/':
             if (html_start == 0): raise DocumentError("closing tag with no matching open")
@@ -131,243 +184,252 @@ def get_first_innermost(tag_name, text):
             start, html_start = (new_start, new_html_start)
     return (start, html_start, html_end, end)
 
-# parse attributes of an (opening) html tag, given as a string
-# returns dictionary of attributes as strings
+
 def parse_attributes(tag):
-    attr = {}
+    """Parse attributes of an (opening) html tag, given as a string
+
+    RETURN: dictionary of attributes as strings
+    """
+
     tag = tag.strip("<>");
-    for m in re.finditer("([\\w-]+) *= *\"(.*?)\"", tag):
-        attr[m.groups()[0]] = m.groups()[1]
-    return attr
+    return {m[1]: m[2] for m in re.finditer("([\\w-]+) *= *\"(.*?)\"", tag)}
 
-# insert given content into template so it can be used in a document
-# returns string
-def process_template(page, fields_provided, inner_html):
-    log(f"  -> applying: {page.relpath} with:")
+
+def process_template(template, fields_provided, inner_html):
+    """Insert content into template
+
+    RETURN: string
+    EXCEPTIONS: DocumentError
+    """
+
+    def err(msg):
+        raise DocumentError(f"template {template.relpath}: {msg}")
     
-    text = page.html_content
+    def field_name(field_tag):
+        try: return parse_attributes(field_tag)["--name"]
+        except KeyError: raise BuildError(template, f"a field tag is missing the attribute `--name`")
 
-    fields_required = set()
-    for m in re.findall(r"<--field.*>", text):
-        attr = parse_attributes(m)
-        try:
-            fields_required.add(attr["--name"]) 
-        except KeyError:
-            raise BuildError(f"in template `{page.relpath}` a field tag is missing the attribute --name")
+    def field_value(field_name):
+        try: return fields_provided[field_name]
+        except KeyError: err(f"field `{field_name}` required")
 
-    for field in fields_required:
-        if not field in fields_provided:
-            raise DocumentError(f"field `{field}` required for template `{page.relpath}`")
+    class mapping:
+        def __init__(self, si, ei, repl):
+            self.start = si; self.end = ei; self.repl = repl
 
-    for key, value in fields_provided.items():
-        (text, nsubs) = re.subn(f"<--field +--name *= *\"{key}\" */?>", value, text)
-        if (nsubs > 0):
-            log(f"      - {key} = {value} ({nsubs} substitutions)")
-        else:
-            warn(f"in `{page.relpath}` field `{key}` provided not used")
+    text = template.content
 
-    matches = re.findall("<--inner-html>", text)
-    if len(matches) > 1:
-        raise BuildError(f"template `{page.relpath}` contains more than one --inner-html tag")
-    if inner_html != "" and len(matches) == 0:
-        warn(f"in template `{page.relpath}` --inner-html provided but not used")
+    field_tags = re.finditer(r'<--field(?: +[\w-]+ *= *"[^"\n\r]*?")* *\/?>', text)
+    inner_html_tags = re.finditer(r'<--inner-html(?: +[\w-]+ *= *"[^"\n\r]*?")* *\/?>', text)
 
-    text = re.sub("<--inner-html>", inner_html, text)
-    return text
+    subs = [mapping(t.start(), t.end(), field_value(field_name(t[0]))) for t in field_tags]
+    subs += [mapping(t.start(), t.end(), inner_html) for t in inner_html_tags]
 
-def process_document(html_content, templates, rec=False):
+    subs.sort(key=lambda r: r.start)
+
+    cursor = 0
+    parts = []
+    for i in range(0, len(subs)):
+        if (cursor > subs[i].start):
+            err(f"overlapping tags")
+        
+        parts += text[cursor:subs[i].start], subs[i].repl
+        cursor = subs[i].end
+
+    parts += text[cursor:]
+    return "".join(parts)
+
+
+def process_html(html_content, templates):
+    """Apply templates to html_content
+
+    RETURN: string
+    EXCEPTIONS: DocumentError
+    """
+
     text = html_content 
 
-    m = get_first_innermost("--template", text)
-    if m:
-        start, html_start, html_end, end = m
-        tag = text[start:html_start]
-        html = text[html_start:html_end]
+    if not (m := find_tag("--template", text)): return text
 
-        attr = parse_attributes(tag)
+    start, html_start, html_end, end = m
+    tag = text[start:html_start]
+    html = text[html_start:html_end]
 
-        if "--name" not in attr:
-            raise DocumentError("template name required")
-        name = attr["--name"]
+    attr = parse_attributes(tag)
 
-        fields_str = ""
-        if "--fields" in attr:
-            fields_str = attr["--fields"]
+    if "--name" not in attr:
+        raise DocumentError("template name required")
+    name = attr["--name"]
 
-        template = templates[name]
+    fields_str = ""
+    if "--fields" in attr:
+        fields_str = attr["--fields"]
 
-        # dictionary of fields provided
-        fields = {}
+    template = templates[name]
 
-        for field_str in fields_str.split(";"):
-            field_list = field_str.split(":");
-            if len(field_list) != 2: raise DocumentError(f"couldn't parse field `{field_str}`") 
-            fields[field_list[0].strip()] = field_list[1].strip()
+    fields = {}
 
-        repl = process_template(template, fields, html)
+    for field_str in fields_str.split(";"):
+        field_list = field_str.split(":");
+        if len(field_list) != 2: raise DocumentError(f"couldn't parse field `{field_str}`") 
+        fields[field_list[0].strip()] = field_list[1].strip()
 
-        text = text[:start] + repl + text[end:]
-        text = process_document(text, templates, True)
-    else:
-        if not rec:
-            log("  -- no templates")
+    repl = process_template(template, fields, html)
 
-    return text
+    text = text[:start] + repl + text[end:]
+    return process_html(text, templates)
 
-# returns list of pages in wd and subdirectories
-# wd is the path all rel(paths) are relative too, it doesn't change
-# in recursive calls.
-def find_build_files(wd, dir_rel = ""):
+
+def find_files(wd, dir_rel = ""):
+    """Recursively create list of all files in wd and subdirs"""
+
     pages = []
-    for entname in listdir(join(wd, dir_rel)):
-        ent_rel = join(dir_rel, entname)
-        if isfile(join(wd, ent_rel)):
-            content = ""
-            is_html = entname.endswith(".html") or entname.endswith(".htm")
-            mtime = getmtime(join(wd, ent_rel))
-            if is_html:
-                with open(join(wd, ent_rel)) as file:
-                    content = file.read()
-            pages += [page(ent_rel, is_html, content, mtime)]
+    if not os.path.isdir(dir := os.path.join(wd, dir_rel)): return pages
+    for ent_name in os.listdir(dir):
+        ent_rel = os.path.join(dir_rel, ent_name)
+        ent_path = os.path.join(wd, ent_rel)
+        if os.path.isfile(ent_path):
+            is_doc = ent_name.endswith(".html") or ent_name.endswith(".htm")
+            pages.append((Document if is_doc else Blob)(ent_path, ent_rel))
         else:
-            pages += find_build_files(wd, ent_rel)
+            pages += find_files(wd, ent_rel)
     return pages
 
-# returns set of string file relative paths
-def find_existing_files(wd, relpath = ""):
-    st = set();
-    path = join(wd, relpath);
-    if not os.path.exists(path):
-        return st
-    for f in listdir(path):
-        filepath = join(path, f)
-        filerelpath = join(relpath, f)
-        if isfile(filepath):
-            st.add(filerelpath)
-        else:
-            st |= (find_existing_files(wd, f))
-    return st
 
-def get_dependencies(page):
-    deps = set()
-    if not page.is_html:
-        return deps
+def template_names(page):
+    """Get names of all templates used in page
 
-    text = page.html_content
-    while(m := get_first_innermost("--template", text)):
+    EXCEPTIONS: BuildError on failure to parse tag
+    NOTES: Doesn't work with multiple templates yet
+    """
+
+    if not type(page) == Document: return set()
+    names, text = set(), page.content
+    while True:
+        try: m = find_tag("--template", text)
+        except DocumentError as e:
+            raise BuildError(page, e)
+
+        if not m: break
         start, html_start, html_end, end = m
         attr = parse_attributes(text[start:html_start])
-        if "--name" not in attr:
-            raise BuildError("template name required")
-        deps.add(attr["--name"])
-        text = text[html_start:html_end]
-    return deps
+        try: names.add(attr["--name"])
+        except KeyError:
+            raise BuildError(page, "template name required")
+        text = text[html_start:html_end] # TODO: THIS IS BROKEN
+    return names
 
-# when was the most recent modification of the document or any of the
-# templates used in it.
-def page_deps_mtime(page, templates):
-    deps = get_dependencies(page)
-    mtime = page.mtime
-    for dep in deps:
-        if not dep in templates:
-            raise BuildError(f"{page.relpath}: reference to nonexistent template `{dep}`")
-        mtime = max(mtime, templates[dep].mtime)
-    return mtime
 
-# returns 2-tuple of string copies and direct copies
-def build(docs_path, template_path, out_path, unchecked_files):
+def template_ident(template):
+    """Get identifier used to refer to a template in pages"""
+
+    return re.sub(r'\.html?$', '', template.relpath)
+
+
+def create_page_builds(pages_path, templates_path, out_path):
+    """Get all page builds required
+
+    EXCEPTIONS: BuildError on failure to parse page
+    """
+
+    src_pages = find_files(pages_path)
+    built_files = find_files(out_path)
+    templates_list = find_files(templates_path)
+    templates = {template_ident(doc): doc for doc in templates_list}
+
+    def get_templates_used(page):
+        ret = {}
+        for name in template_names(page):
+            if name not in templates:
+                raise BuildError(page, f"`{name}` template doesn't exist")
+            ret[name] = templates[name]
+        return ret
+
+    get_existing = lambda page: next((f for f in built_files if f.relpath == page.relpath), None)
+    has_src = lambda page: next((True for f in src_pages if f.relpath == page.relpath), False)
+
+    if (stray_pages := [f.relpath for f in built_files if not has_src(f)]):
+        warn("stray files in build directory\n  - " + "\n  - ".join(stray_pages))
+
+    page_builds = [PageBuild(page, out_path, get_existing(page), get_templates_used(page)) for page in src_pages]
     
-    docs = find_build_files(docs_path)
-    templates_list = find_build_files(template_path)
-    
-    templates = {re.sub(r'\.html?$', '', page.relpath): page for page in templates_list}
+    def is_required(build):
+        if not build.replace: return True
+        return max([build.src] + list(build.templates.values()), key = lambda doc: doc.mtime).mtime > build.replace.mtime
 
-    outdated_docs = []
-
-    for page in docs:
-        if page.relpath in unchecked_files:
-            last_built = getmtime(join(out_path, page.relpath))
-            unchecked_files.remove(page.relpath)
-            if page_deps_mtime(page, templates) > last_built:
-                outdated_docs.append(page)
-        else:
-            outdated_docs.append(page)
-    
-    if len(unchecked_files) > 0:
-        warn("stray files in build directory\n  - " + "\n  - ".join(unchecked_files))
-
-    strcp = [] # (text, relpath)
-    filecp = [] # (srcpath, relpath)
+    return [b for b in page_builds if is_required(b)]
 
 
-    for page in outdated_docs:
-        log(textfmt.bold + page.relpath + textfmt.reset);
-        if page.is_html:
-            try:
-                content = process_document(page.html_content, templates)
-            except DocumentError as e:
-                raise to_build_err(page.relpath, e)
+def process(page_build):
+    """Processes page if needed, storing the result in page_build.processed
 
-            strcp.append((content, page.relpath))
-        else:
-            log("  -> direct copy")
-            filecp.append((join(docs_path, page.relpath), page.relpath))
+    EXCEPTIONS: BuildError
+    """
 
-    return (strcp, filecp)
+    if not hasattr(page_build, "processed"): return
 
-def save(string_copies, file_copies, out_path): 
-    if len(string_copies) + len(file_copies) == 0:
-        print("nothing to do; all files up to date")
-        return
-    
-    os.makedirs(out_path, exist_ok=True)
-    unbuilt = find_existing_files(out_path)
-
-    for pair in string_copies:
-        content, relpath = pair
-        path = join(out_path, relpath)
-
-        os.makedirs(split(path)[0], exist_ok=True)
-        with open(path, "w") as f:
-            f.write(content)
-
-        if relpath in unbuilt:
-            print(f"- replaced: {relpath}")
-            unbuilt.remove(relpath)
-        else:
-            print(f"- new: {relpath}")
-    for pair in file_copies:
-        srcpath, relpath = pair
-        dstpath = join(out_path, relpath)
-
-        os.makedirs(split(dstpath)[0], exist_ok=True)
-        shutil.copyfile(srcpath, dstpath)
-
-        if relpath in unbuilt:
-            print(f"- replaced (direct copy): {relpath}")
-            unbuilt.remove(relpath)
-        else:
-            print(f"- new (direct copy): {relpath}")
-
-if __name__ == '__main__':
-    if len(sys.argv) >= 2:
-        out_path = sys.argv[1]
-    else: out_path = options.out_path
-
-    existing_files = find_existing_files(out_path)
     try:
-        string_copies, file_copies = build(options.docs_path, options.template_path, out_path, existing_files)
-    except BuildError as e:
-        print(textfmt.red + "Error while processing. No files altered." + textfmt.reset)
-        print(f"  {e}")
+        page_build.processed = process_html(page_build.src.content, page_build.templates)
+    except DocumentError as e:
+        raise BuildError(page_build.src, e)
+
+
+def save(page_build):
+    """Write page to output file"""
+
+    save_path = os.path.join(page_build.out_path, page_build.src.relpath)
+    os.makedirs(os.path.split(save_path)[0], exist_ok=True)
+
+    if not page_build.replace:
+        assert(not os.path.exists(save_path))
+    else: assert(os.path.isfile(save_path))
+
+    if hasattr(page_build, "processed"):
+        with open(save_path, "w") as f:
+            f.write(page_build.processed)
     else:
-        save(string_copies, file_copies, out_path)
-    print_warnings()
+        shutil.copyfile(page_build.src.path, save_path)
 
 
+def eprint(msg):
+    """Print msg in red to stderr"""
+
+    print(textfmt.red + msg + textfmt.reset, file=sys.stderr)
 
 
+def main():
+    try:
+        page_builds = create_page_builds(options.docs_path, options.template_path, options.out_path)
+        for b in page_builds:
+            print(b)
+            process(b)
+    except BuildError as e:
+        eprint(f"Error while processing. No files altered.\n  {e}")
+        return 1
+
+    if not page_builds:
+        print("nothing to do; all files up to date")
+        return 0
+
+    try:
+        files_saved = 0
+        for b in page_builds:
+            save(b)
+            files_saved += 1
+    except Exception as e:
+        err = e
+    
+    if "files_saved" in locals():
+        print(f"{textfmt.blue}Saved {files_saved}/{len(page_builds)} files{textfmt.reset}")
+
+    if "err" in locals():
+        eprint(f"Error while saving:\n  {err}")
+        return 2 
+
+    return 0
 
 
-
-
+if __name__ == "__main__":
+    ret = main()
+    warn.print()
+    exit(ret)
