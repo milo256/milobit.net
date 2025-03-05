@@ -85,6 +85,14 @@ class DocumentError(Exception):
 
 
 class File:
+    """Base class for Document and Blob
+    
+    PROPERTIES:
+        - path: file path
+        - relpath: file path relative to directory specified by user
+        - mtime (read-only): last modified time
+    """
+
     def __init__(self, path, relpath):
         self.path = path
         self.relpath = relpath
@@ -103,7 +111,12 @@ class File:
 
 
 class Document(File):
-    """A pseudo-html file"""
+    """A pseudo-html file
+
+    PROPERTIES:
+        (see File)
+        - content (read-only): str content of file
+    """
 
     def __init__(self, path, relpath):
         super().__init__(path, relpath)
@@ -123,15 +136,20 @@ class Blob(File):
     
 
 class PageBuild:
-    """A page to build"""
+    """A page to build
 
-    def __init__(self, src, out_path, replace, templates):
-        """Create PageBuild
-        
+    PROPERTIES:
         - src: source Document or Blob
         - replace: Document or Blob to replace, or None if new
-        - templates: Templates used in the src (dictionary)
-        """
+        - templates: dict of Templates used in src
+        - processed:
+            *Only present in files that have been or ought to be processed*
+            str of content of the processed file or None if yet to be processed
+    """
+
+    def __init__(self, src, out_path, replace, templates):
+        """Create PageBuild"""
+        
         self.src = src; self.out_path = out_path
         self.replace = replace; self.templates = templates
         if type(self.src) == Document and self.templates:
@@ -161,7 +179,7 @@ def find_tag(tag_name, text):
 
     RETURN: tuple of indicies (start, html_start, html_end, end)
              or None if the tag does not appear in the text.
-    EXCEPTIONS: DocumentError if the tag is invalid
+    EXCEPTIONS: DocumentError on invalid tag
     """
 
     start, html_start, html_end, end = (0, 0, 0, 0)
@@ -189,10 +207,20 @@ def parse_attributes(tag):
     """Parse attributes of an (opening) html tag, given as a string
 
     RETURN: dictionary of attributes as strings
+    EXCEPTIONS: DocumentError on invalid tag
     """
 
-    tag = tag.strip("<>");
-    return {m[1]: m[2] for m in re.finditer("([\\w-]+) *= *\"(.*?)\"", tag)}
+    text, n = re.subn(r"(^< *[\w-]+ *)|(\/?>$)", "", tag)
+    if (n != 2): raise DocumentError(f"invalid tag `{tag}`")
+
+    ret = {}
+    while text != "":
+        m = re.match(r'([\w-]+) *= *"([^"\n\r]*?)" *', text)
+        if not m: raise DocumentError(f"invalid tag `{tag}`")
+        ret[m[1]] = m[2]
+        text = text[m.end():]
+
+    return ret
 
 
 def process_template(template, fields_provided, inner_html):
@@ -398,7 +426,7 @@ def eprint(msg):
 
 
 def main():
-    if sys.argv[1]:
+    if len(sys.argv) > 1:
         options.out_path = sys.argv[1]
     try:
         page_builds = create_page_builds(options.docs_path, options.template_path, options.out_path)
