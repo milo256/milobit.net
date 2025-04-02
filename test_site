@@ -1,0 +1,14 @@
+#!/bin/sh
+
+BUILD_PATH='./build'
+PORT='8000'
+
+pkill -f 'python3 -m http.server'
+
+[[ -n $1 ]] && exit 0
+
+set -e
+
+cd "$BUILD_PATH"
+(python3 -m http.server $PORT & xdg-open 'http://localhost:8000' &) &>/dev/null
+echo "server running on localhost:$PORT"
