@@ -167,8 +167,22 @@ class warn:
     """Stores and prints warnings"""
 
     stack = []
+    context = [""]
     def __new__(cls, msg):
-        cls.stack.append(f"{textfmt.yellow}Warning: {msg}{textfmt.reset}")
+        cls.stack.append(
+            textfmt.yellow
+            + f"Warning:{" ".join(cls.context + [msg])}"
+            + textfmt.reset
+        )
+
+    @classmethod
+    def add_context(cls, msg):
+        cls.context.append(msg)
+
+    @classmethod
+    def remove_context(cls):
+        cls.context.pop()
+
     @classmethod
     def print(cls):
         while warn.stack: print(warn.stack.pop())
@@ -230,16 +244,21 @@ def process_template(template, fields_provided, inner_html):
     EXCEPTIONS: DocumentError
     """
 
-    def err(msg):
+    unused_fields = set(fields_provided)
+
+    def doc_err(msg):
         raise DocumentError(f"template {template.relpath}: {msg}")
     
-    def field_name(field_tag):
+    def get_field_name(field_tag):
         try: return parse_attributes(field_tag)["--name"]
         except KeyError: raise BuildError(template, f"a field tag is missing the attribute `--name`")
 
-    def field_value(field_name):
-        try: return fields_provided[field_name]
-        except KeyError: err(f"field `{field_name}` required")
+    def get_field_value(field_name):
+        try:
+            value = fields_provided[field_name]
+        except KeyError: doc_err(f"field `{field_name}` required")
+        unused_fields.discard(field_name)
+        return value
 
     class mapping:
         def __init__(self, si, ei, repl):
@@ -250,8 +269,11 @@ def process_template(template, fields_provided, inner_html):
     field_tags = re.finditer(r'<--field(?: +[\w-]+ *= *"[^"\n\r]*?")* *\/?>', text)
     inner_html_tags = re.finditer(r'<--inner-html(?: +[\w-]+ *= *"[^"\n\r]*?")* *\/?>', text)
 
-    subs = [mapping(t.start(), t.end(), field_value(field_name(t[0]))) for t in field_tags]
+    subs = [mapping(t.start(), t.end(), get_field_value(get_field_name(t[0]))) for t in field_tags]
     subs += [mapping(t.start(), t.end(), inner_html) for t in inner_html_tags]
+
+    for field in unused_fields:
+        warn(f"template {template.relpath}: field {field} not used");
 
     subs.sort(key=lambda r: r.start)
 
@@ -259,7 +281,7 @@ def process_template(template, fields_provided, inner_html):
     parts = []
     for i in range(0, len(subs)):
         if (cursor > subs[i].start):
-            err(f"overlapping tags")
+            doc_err(f"overlapping tags")
         
         parts += text[cursor:subs[i].start], subs[i].repl
         cursor = subs[i].end
@@ -396,10 +418,12 @@ def process(page_build):
 
     if not hasattr(page_build, "processed"): return
 
+    warn.add_context(f"[ {page_build.src.relpath} ]")
     try:
         page_build.processed = process_html(page_build.src.content, page_build.templates)
     except DocumentError as e:
         raise BuildError(page_build.src, e)
+    warn.remove_context()
 
 
 def save(page_build):
