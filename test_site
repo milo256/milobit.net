@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BUILD_PATH='./build'
+BUILD_PATH='./_site'
 PORT='8000'
 
 pkill -f 'python3 -m http.server'

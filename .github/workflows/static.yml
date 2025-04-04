@@ -31,7 +31,7 @@ jobs:
           python-version: '3.13'
       
       - name: Run script
-        run: python build.py ./_site
+        run: ./build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

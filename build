@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+TEMPLATE_PATH='templates'
+DOCS_PATH='docs'
+OUT_PATH='_site'
+
+HT_NAME='hypertemplate.py'
+HT_URL='https://raw.githubusercontent.com/milo256/hypertemplate/refs/heads/master/hypertemplate.py'
+
+if [[ -f $HT_NAME ]]; then
+    cmd="./$HT_NAME"
+else
+    cmd="python3 <(curl $HT_URL)"
+fi
+
+set -x
+
+eval $cmd -t $TEMPLATE_PATH -d $DOCS_PATH $OUT_PATH $@
