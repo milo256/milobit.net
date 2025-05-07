@@ -99,6 +99,17 @@ table.main td {
     padding: 0
 }
 
+ul.plist {
+    margin: 0px 20px 30px;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul.plist > * {
+    border-top: 1px solid #4C566A;
+    padding: 6px 0;
+}
+
 ul.plain {
     list-style-type: none;
     padding: 0;
@@ -114,7 +125,7 @@ ul.hnav {
     display: flex;
 }
 
-ul.vnav > :not(:last-child) {
+ul.vnav > * :not(:last-child) {
     border-bottom: 1px solid #4C566A;
 }
 
