@@ -80,8 +80,22 @@ div.paper > img {
     margin-top: 5px;
 }
 
+table.prices {
+    text-wrap: nowrap;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.prices th, table.prices td {
+    border-bottom: 1px solid #4C566A;
+}
+
+table.prices td {
+    text-align: right;
+}
+
 table.main {
-    margin: 10px;
+    margin: 0px;
     border-spacing: 0;
     vertical-align: top;
 }
@@ -94,7 +108,7 @@ table.main th {
 }
 
 table.main td {
-    width: 512px;
+    width: 480px;
     vertical-align: top;
     padding: 0
 }
