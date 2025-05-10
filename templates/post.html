@@ -6,26 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-    <div style="max-width: 900px">
-        <div class="window" style="display:inline-block; margin-bottom: 0;">
-            <ul class="hnav">
-                <h2 class="inline">nav</h2>
-                <li><a href="/">home</a></li>
-                <li><a href="/art">gallery</a></li>
-                <li><a href="/com">commissions</a></li>
-                <li><a href="https://milobyte.atabook.org">guestbook</a></li>
-            </ul>
+    <div class="horizontal centered">
+    <div class="vertical align-start" style="max-width: 900px;">
+        <div class="window hnav" style="width: unset;">
+            <h2 class="inline">nav</h2><a href="/">home</a><a href="/art">gallery</a><a href="/com">commissions</a><a href="https://milobyte.atabook.org">guestbook</a>
         </div>
+        <br>
         <div class="window">
-            <ul class="hnav", style="position:absolute; right: 0">
-                <li><a href="<--field --name="previous">"><- previous</a></li>
-                <li><a href="<--field --name="next">">next -></a></li>
-            </ul>
+            <div class="hnav", style="position:absolute; right: 0;">
+                <a href="<--field --name="previous">"><- previous</a><a href="<--field --name="next">">next -></a>
+            </div>
             <h2><--field --name="title"></h2>
             <--inner-html>
         </div>
     </div>
-</table>
+    </div>
 <footer>
     <p>milobit.net - est 2024</p>
 </footer>

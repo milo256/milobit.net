@@ -1,9 +1,9 @@
 <--template --name="basic-page" --fields="title: milo's homepage">
     <div class="window">
-        <span class="splash-text" id="random-text">i support your decision to disallow javascript</span>
+        <span id="splash-text">i support your decision to disallow javascript</span>
         <h1>home page</h1>
-        <div class="paper", style="rotate:4deg">
-            <img src="graphics/arch-chan.png" alt="milo's webbed site" style="width:160px">
+        <div class="paper window", style="margin: 12px 8px; padding: 6px; display: inline-block; rotate:4deg">
+            <img src="graphics/arch-chan.png" alt="milo's webbed site" style="width:160px; margin-bottom: -3px;">
         </div>
         <h3>welcome!</h3>
         <p>
@@ -21,20 +21,23 @@
         <a href="https://github.com/milo256/milobit.net">source code for this website</a>
         </p>
     </div>
-    <div style="width: 200px; display: inline-block; margin-top: 0;" class="window">
-        <h1>me</h1>
-        <b>pronouns:</b> he/him<br>
-        <b>location:</b> USA<br>
-        <b>uptime:</b> 20 yrs<br>
-        <b>vehicle:</b> volvo 245<br>
-        <b>OS:</b> arch linux<br>
-        <b>text editor:</b> neovim<br>
-    </div><div style="display: inline-block; vertical-align: top; margin-top: 0;" class="window">
-        <h1>friends' sites</h1>
-        <a href='https://insect.christmas'><img src='/graphics/insect.christmasbutton.jpg'></a>
-        <a href='https://pink-luva.neocities.org/'><img src='/graphics/ae.jpg'></a>
-        <br>
-        <a href='https://dilongparadoxus.com'>dilong-paradoxus</a>
+    <div class="horizontal align-start wrapping">
+        <div style="width: 200px;" class="window">
+            <h1>me</h1>
+            <b>pronouns:</b> he/him<br>
+            <b>location:</b> USA<br>
+            <b>uptime:</b> 20 yrs<br>
+            <b>vehicle:</b> volvo 245<br>
+            <b>OS:</b> arch linux<br>
+            <b>text editor:</b> neovim<br>
+        </div>
+        <div class="window" style="text-wrap: nowrap;">
+            <h1>friends' sites</h1>
+            <a href='https://insect.christmas'><img src='/graphics/insect.christmasbutton.jpg'></a>
+            <a href='https://pink-luva.neocities.org/'><img src='/graphics/ae.jpg'></a>
+            <br>
+            <a href='https://dilongparadoxus.com'>dilong-paradoxus</a>
+        </div>
     </div>
     <script>
         var texts = [
@@ -45,6 +48,6 @@
             "<a href='https://github.com/milo256/milobit.net'>free and open source!</a>", "or as i've taken to calling it, GNU + Linux",
             "100% human-made!", "guaranteed!",
         ];
-        document.getElementById("random-text").innerHTML = texts[Math.floor(Math.random()*texts.length)];
+        document.getElementById("splash-text").innerHTML = texts[Math.floor(Math.random()*texts.length)];
     </script>
 </--template>
