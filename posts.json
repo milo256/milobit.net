@@ -1,0 +1,126 @@
+{
+    "output_dir": "docs/art",
+    "resource_dir": "post-resources",
+    "catalog": [
+        {
+            "title": "hatsune miku",
+            "content": [
+                {
+                    "type": "image",
+                    "url": "miku.png"
+                }
+            ]
+        },
+        {
+            "title": "this god won't forgive you",
+            "description": "falke (signalis)",
+            "content": [
+                {
+                    "type": "image",
+                    "url": "falke.png"
+                }
+            ]
+        },
+        {
+            "content": [
+                {
+                    "type": "image",
+                    "url": "girl.png"
+                }
+            ]
+        },
+        {
+            "title": "saab gripen",
+            "content": [
+                {
+                    "type": "image",
+                    "url": "gripen.png"
+                },
+                {
+                    "type": "image",
+                    "url": "gripen-sketch.png"
+                }
+            ]
+        },
+        {
+            "title": "estel photon 2xr",
+            "content": [
+                {
+                    "type": "image",
+                    "url": "photon2xr3.png"
+                }
+            ]
+        },
+        {
+            "title": "amber oc",
+            "content": [
+                {
+                    "type": "image",
+                    "url": "amber.png"
+                }
+            ]
+        },
+        {
+            "title": "amber piloting",
+            "content": [
+                {
+                    "type": "image",
+                    "url": "amber2.png"
+                }
+            ]
+        },
+        {
+            "title": "lr7 turbine pheonix",
+            "content": [
+                {
+                    "type": "image",
+                    "url": "lr7.png"
+                },
+                {
+                    "type": "image",
+                    "url": "lr7banner.png"
+                },
+                {
+                    "type": "image",
+                    "url": "lr73d.png"
+                }
+            ]
+        },
+        {
+            "title": "spaceship 01",
+            "content": [
+                {
+                    "type": "image",
+                    "url": "ship1.png"
+                }
+            ]
+        },
+        {
+            "title": "spaceship 02",
+            "content": [
+                {
+                    "type": "image",
+                    "url": "ship2.png"
+                }
+            ]
+        },
+        {
+            "title": "spaceship 03",
+            "content": [
+                {
+                    "type": "image",
+                    "url": "ship3.png"
+                }
+            ]
+        },
+        {
+            "title": "spaceship 04",
+            "content": [
+                {
+                    "type": "image",
+                    "url": "ship4.png"
+                }
+            ]
+        }
+    ]
+}

@@ -17,4 +17,6 @@ fi
 
 set -x
 
+python3 postpost.py --build
+
 eval $cmd -t $TEMPLATE_PATH -d $DOCS_PATH $OUT_PATH $@

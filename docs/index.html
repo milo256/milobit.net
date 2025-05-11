@@ -1,4 +1,5 @@
 <--template --name="basic-page" --fields="title: milo's homepage">
+<div class="vertical" style="flex: auto; max-width: 480px">
     <div class="window">
         <span id="splash-text">i support your decision to disallow javascript</span>
         <h1>home page</h1>
@@ -39,15 +40,16 @@
             <a href='https://dilongparadoxus.com'>dilong-paradoxus</a>
         </div>
     </div>
-    <script>
-        var texts = [
-            ":(){ :|:& };:", "trans rights are human rights!", "minecraft reference", "best viewed with netscape navigator 4.0 or below",
-            "the bee's knees", "the world's best website, some say", "made with only ethically sourced HTML",
-            "brought to you by a series of tubes", "if you can read this, you have javascript enabled", "the website of all time",
-            "the last website you'll ever need", "have a nice day!", "click <a href='you-win.html'>the answer</a>", "rock and roll! and stone",
-            "<a href='https://github.com/milo256/milobit.net'>free and open source!</a>", "or as i've taken to calling it, GNU + Linux",
-            "100% human-made!", "guaranteed!",
-        ];
-        document.getElementById("splash-text").innerHTML = texts[Math.floor(Math.random()*texts.length)];
-    </script>
+</div>
+<script>
+    var texts = [
+        ":(){ :|:& };:", "trans rights are human rights!", "minecraft reference", "best viewed with netscape navigator 4.0 or below",
+        "the bee's knees", "the world's best website, some say", "made with only ethically sourced HTML",
+        "brought to you by a series of tubes", "if you can read this, you have javascript enabled", "the website of all time",
+        "the last website you'll ever need", "have a nice day!", "click <a href='you-win.html'>the answer</a>", "rock and roll! and stone",
+        "<a href='https://github.com/milo256/milobit.net'>free and open source!</a>", "or as i've taken to calling it, GNU + Linux",
+        "100% human-made!", "guaranteed!",
+    ];
+    document.getElementById("splash-text").innerHTML = texts[Math.floor(Math.random()*texts.length)];
+</script>
 </--template>
