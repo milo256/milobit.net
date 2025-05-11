@@ -29,6 +29,20 @@ body {
     font-size: 12px;
 }
 
+.card, .card:hover {
+    color: var(--textp);
+    text-decoration: none;
+}
+
+.card h3 {
+    margin: 4px 0 2px;
+}
+
+.card:hover h1 {
+    text-decoration: underline;
+}
+
+
 h1, h2 {
     text-align: center;
     border-bottom: 1px solid var(--borderl);
@@ -166,6 +180,12 @@ ul.plist > * {
     to { scale: 1.08 }
 }
 
+#gallery-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+}
+
 #splash-text a {
     color: #ebcb8b;
 }
@@ -194,6 +214,8 @@ ul.plist > * {
         top: 18px;
         right: -10px;
     }
+    #gallery-wrapper {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
 }
-
-

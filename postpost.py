@@ -2,7 +2,7 @@
 
 import os, sys, shutil, subprocess, argparse, json
 
-THUMB_MAX_SIZE = (360, 720)
+THUMB_MAX_SIZE = 360
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -66,7 +66,7 @@ def process_post(index):
         <div class="window">
             <div class="hnav", style="position:absolute; right: 0;">
                 {
-                    (f'<a href="{prev}"><- previous</a>' if prev else '')
+                    (f'<a href="{prev}"><- prev</a>' if prev else '')
                     + (f'<a href="{next}">next -></a>' if next else '')
                 }
             </div>
@@ -85,9 +85,9 @@ def process_post(index):
 def make_thumb(post):
     thumb_src = os.path.join(resource_dir, post['thumbnail'])
     thumb_dst = os.path.join(output_dir, 'thumbs', post['thumbnail'])
-    scale_size = f'{THUMB_MAX_SIZE[0]}x'
     subprocess.run([
-        'magick', thumb_src, '-strip', '-resize', scale_size, thumb_dst
+        'magick', thumb_src, '-strip', '-resize',
+        f'{THUMB_MAX_SIZE}x', thumb_dst
     ])
 
 def make_preview(index):
@@ -96,9 +96,9 @@ def make_preview(index):
         thumb_path = os.path.join('thumbs', post['thumbnail'])
     title = post.get('title', 'untitled')
     return f"""
-    <a href="{index:03}.html"><div class="window" style="max-width: 180px">
-        <h2>{index:03}</h2>
-        <p>{title}</p>
+    <a href="{index:03}.html" class="card"><div class="window" style="flex: 1 0 auto;">
+        <h1>{index:03}</h1>
+        <h3>{title}</h3>
         {f'<img src="{thumb_path}" style="width: 100%">' if 'thumbnail' in post else ''}
     </div></a>"""
 
@@ -121,6 +121,63 @@ for i in range(0, len(catalog)):
     process_post(i)
 
 previews = []
+page_count = 0
+
+POSTS_PER_PAGE = 8
+COLUMNS = 2
+
+def even_groups(total, divisor):
+    ret = [int(total/divisor)] * divisor
+    for i in range(0, total % divisor):
+        ret[i] += 1
+    return ret
+
+def write_post(index):
+    post = catalog[index]
+    path = os.path.join(output_dir, post['filename'])
+    if 'thumbnail' in post:
+        make_thumb(post)
+    previews.append(make_preview(index))
+    with open(path, 'w') as f:
+        f.write(post['html'])
+
+def write_gallery(page_index):
+    index_path = os.path.join(
+            output_dir, 'index.html' if page_index == 0 else f'index{page_index + 1}.html'
+        )
+    columns_html = ""
+    previews_start = page_index * POSTS_PER_PAGE
+    previews_count = min(POSTS_PER_PAGE, len(previews) - previews_start)
+
+    for n in even_groups(previews_count, COLUMNS):
+        columns_html += (
+                '<div class="vertical" style="width: 220px; flex: 1 0 auto;">'
+                f'{''.join(previews[previews_start:previews_start + n])}'
+                '</div>'
+            )
+        previews_start += n
+    
+    prev = None if page_index == 0 else '.' if page_index == 1 else f'index{page_index}.html'
+    next = None if page_index == page_count - 1 else f'index{page_index + 2}.html'
+
+    with open(index_path, 'w') as f:
+        f.write('<--template --name="basic-page" $title="art gallery">'
+                '<div id="gallery-wrapper">'
+                '<div class="horizontal" style="flex-wrap: wrap">'
+                f'{columns_html}'
+                '</div>'
+                '<div class="window">'
+                '<h1>art gallery</h1>'
+                f'page {page_index + 1}/{page_count}'
+                '<br>'
+                f'{
+                    (f'<a href="{prev}"><- prev</a> ' if prev else '')
+                    + (f'<a href="{next}">next -></a>' if next else '')
+                }'
+                '</div>'
+                '</div>'
+                '</--template>'
+            )
 
 if args.build:
     if os.path.isdir(output_dir):
@@ -132,29 +189,18 @@ if args.build:
         dst_path = os.path.join(output_dir, res)
         shutil.copyfile(src_path, dst_path)
     for i in range(len(catalog)):
-        post = catalog[i]
-        path = os.path.join(output_dir, post['filename'])
-        if 'thumbnail' in post:
-            make_thumb(post)
-        previews.append(make_preview(i))
-        with open(path, 'w') as f:
-            f.write(post['html'])
-
+        write_post(i)
+    
     previews.reverse()
 
-    index_path = os.path.join(output_dir, 'index.html')
-    columns_html = ""
+    page_count = int(len(previews)/POSTS_PER_PAGE)
+    if len(previews) % POSTS_PER_PAGE:
+        page_count += 1
 
-    halflen = int(len(previews)/2) + 1
-    columns_html = (
-        f'<div class="vertical">{''.join(previews[:halflen])}</div>'
-        + f'<div class="vertical">{''.join(previews[halflen:])}</div>'
-    )
+    for i in range(0, page_count):
+        write_gallery(i)
 
-    with open(index_path, 'w') as f:
-        f.write('<--template --name="basic-page" $title="art gallery">'
-            '<div class="horizontal" style="flex-wrap: wrap;">'
-            f'{columns_html}'
-            '</div>'
-            '</--template>')
+
+
+
 
