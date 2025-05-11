@@ -22,10 +22,9 @@ body {
     color: var(--textp);
     background-color: var(--bgbase);
     background-image: url("graphics/bg.png");
-    font-size: 0px;
 }
 
-.window, .window * {
+* {
     font-size: 12px;
 }
 
