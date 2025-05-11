@@ -16,6 +16,7 @@ def process_element(post, index):
 
     match elem['type']:
         case 'image':
+            post['image_count'] += 1
             if 'thumbnail' not in post:
                 post['thumbnail'] = elem['url']
 
@@ -41,6 +42,8 @@ def process_element(post, index):
 def process_post(index):
     post = catalog[index]
     elem_str_list = []
+    
+    post['image_count'] = 0
     for i in range(0, len(post.get('content', []))):
         elem_str_list.append(process_element(post, i))
 
@@ -99,6 +102,10 @@ def make_preview(index):
     <a href="{index:03}.html" class="card"><div class="window" style="flex: 1 0 auto;">
         <h1>{index:03}</h1>
         <h3>{title}</h3>
+        {('<span class="image-count-label">1/'
+            + str(post['image_count'])
+            + '</span>') if post['image_count'] > 1 else ''
+        }
         {f'<img src="{thumb_path}" style="width: 100%">' if 'thumbnail' in post else ''}
     </div></a>"""
 
