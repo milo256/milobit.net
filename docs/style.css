@@ -18,7 +18,6 @@
 body {
     font-family: monospace;
     text-align: center;
-    text-wrap: nowrap;
     color: var(--textp);
     background-color: var(--bgbase);
     background-image: url("graphics/bg.png");
@@ -113,7 +112,6 @@ div.window {
     margin: 4px 4px;
     padding: 0px 5px 3px;
     position: relative;
-    text-wrap: wrap;
     text-align: left;
     background-color: var(--bgwin);
     border: 1px solid var(--borderl);
@@ -165,10 +163,8 @@ ul.plist > * {
 }
 
 .hnav {
-    text-align: left;
+    overflow: scroll;
     text-wrap: nowrap;
-    margin: 0;
-    padding: 0;
 }
 
 .hnav > * {

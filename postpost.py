@@ -48,42 +48,28 @@ def process_post(index):
         elem_str_list.append(process_element(post, i))
 
     content = ''.join(elem_str_list)
-    title = post.get('title', str(index))
+    title = post.get('title', 'no title')
+    desc = post.get('description', 'no description')
     prev = None if index == 0 else f'{index - 1:03}.html'
     next = None if index == len(catalog) - 1 else f'{index + 1:03}.html'
 
     post['filename'] = f'{index:03}.html'
 
-    post['html'] = f"""
-<!DOCTYPE html><html lang="en"><head>
-<title>{title}</title>
-<link rel="stylesheet" href='/style.css'>
-<meta name="viewport" content="width=device-width, initial-scale=1" /></head>
-<body>
-    <div class="horizontal centered">
-    <div class="vertical align-start" style="max-width: 900px;">
-        <div class="window hnav">
-            <h2 class="inline">nav</h2><a href="/">home</a><a href="/art">gallery</a><a href="/com">commissions</a><a href="https://milobyte.atabook.org">guestbook</a>
-        </div>
-        <br>
-        <div class="window">
-            <div class="hnav", style="position:absolute; right: 0;">
-                {
-                    (f'<a href="{prev}"><- prev</a>' if prev else '')
-                    + (f'<a href="{next}">next -></a>' if next else '')
-                }
-            </div>
-            <h2>{title}</h2>
-            {content}
-        </div>
-    </div>
-    </div>
-<footer>
-    <p>milobit.net - est 2024</p>
-</footer>
-</body>
-</html>
-"""
+    post['html'] = (
+            f'<--template --name="post" $title="{title}">'
+            '<div class="window">'
+                '<div class="hnav", style="position:absolute; right: 0;">'
+                    f'{
+                        (f'<a href="{prev}"><- prev</a>' if prev else '')
+                        + f'<span>{(index + 1)}/{len(catalog)}</span>'
+                        + (f'<a href="{next}">next -></a>' if next else '')
+                    }'
+                '</div>'
+                f'<h2 style="text-align: left">{title}</h2>'
+                f'{content}'
+            '</div>'
+            '</--template>'
+        )
 
 def make_thumb(post):
     thumb_src = os.path.join(resource_dir, post['thumbnail'])
@@ -182,11 +168,13 @@ def write_gallery(page_index):
                             f'{nav_buttons_html} <a href="#">back to top</a>'
                         '</div>'
                     '</div>'
-                    '<div class="window">'
-                        '<h1>art gallery</h1>'
-                        f'page {page_index + 1}/{page_count}'
-                        '<br>'
-                        f'{nav_buttons_html}'
+                    '<div class="vertical" id="gallery-info">'
+                        '<div class="window">'
+                            '<h1>art gallery</h1>'
+                            f'page {page_index + 1}/{page_count}'
+                            '<br>'
+                            f'{nav_buttons_html}'
+                        '</div>'
                     '</div>'
                 '</div>'
                 '</--template>'

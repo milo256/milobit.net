@@ -1,174 +1,208 @@
 {
-    "output_dir": "docs/art",
-    "resource_dir": "post-resources",
-    "catalog": [
+  "output_dir": "docs/art",
+  "resource_dir": "post-resources",
+  "catalog": [
+    {
+      "title": "hatsune miku",
+      "design": "miku",
+      "created": "2023/12",
+      "content": [
         {
-            "title": "hatsune miku",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "miku.png"
-                }
-            ]
-        },
-        {
-            "title": "this god won't forgive you",
-            "description": "falke (signalis)",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "falke.png"
-                }
-            ]
-        },
-        {
-            "content": [
-                {
-                    "type": "image",
-                    "url": "girl.png"
-                }
-            ]
-        },
-        {
-            "title": "saab gripen",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "gripen.png"
-                },
-                {
-                    "type": "image",
-                    "url": "gripen-sketch.png"
-                }
-            ]
-        },
-        {
-            "title": "estel photon 2xr",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "photon2xr3.png"
-                }
-            ]
-        },
-        {
-            "title": "amber oc",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "amber.png"
-                }
-            ]
-        },
-        {
-            "title": "amber piloting",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "amber2.png"
-                }
-            ]
-        },
-        {
-            "title": "lr7 turbine pheonix",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "lr7.png"
-                },
-                {
-                    "type": "image",
-                    "url": "lr7banner.png"
-                },
-                {
-                    "type": "image",
-                    "url": "lr73d.png"
-                }
-            ]
-        },
-        {
-            "title": "spaceship 01",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "ship1.png"
-                }
-            ]
-        },
-        {
-            "title": "spaceship 02",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "ship2.png"
-                }
-            ]
-        },
-        {
-            "title": "spaceship 03",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "ship3.png"
-                }
-            ]
-        },
-        {
-            "title": "spaceship 04",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "ship4.png"
-                }
-            ]
-        },
-        {
-            "title": "exploration",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "exploration.png"
-                }
-            ]
-        },
-        {
-            "title": "robot girl",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "robotgirl.png"
-                },
-                {
-                    "type": "image",
-                    "url": "robotgirl2.png"
-                }
-            ]
-        },
-        {
-            "title": "icewar soldiers",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "europa-icewar.png"
-                }
-            ]
-        },
-        {
-            "content": [
-                {
-                    "type": "image",
-                    "url": "dg2.png"
-                }
-            ]
-        },
-        {
-            "title": "variable geometry fighter",
-            "content": [
-                {
-                    "type": "image",
-                    "url": "transform.png"
-                }
-            ]
+          "type": "image",
+          "url": "miku.png"
         }
-    ]
+      ]
+    },
+    {
+      "title": "this god won't forgive you",
+      "design": "signalis/falke",
+      "created": "2024/5",
+      "content": [
+        {
+          "type": "image",
+          "url": "falke.png"
+        }
+      ]
+    },
+    {
+      "design": "original",
+      "created": "2024/10",
+      "content": [
+        {
+          "type": "image",
+          "url": "girl.png"
+        }
+      ]
+    },
+    {
+      "title": "saab gripen",
+      "design": "nonfiction",
+      "created": "2024/10",
+      "content": [
+        {
+          "type": "image",
+          "url": "gripen.png"
+        },
+        {
+          "type": "image",
+          "url": "gripen-sketch.png"
+        }
+      ]
+    },
+    {
+      "title": "estel photon 2xr",
+      "design": "original",
+      "created": "2024/11",
+      "content": [
+        {
+          "type": "image",
+          "url": "photon2xr3.png"
+        }
+      ]
+    },
+    {
+      "title": "amber oc",
+      "design": "original/amber",
+      "created": "2024/12",
+      "content": [
+        {
+          "type": "image",
+          "url": "amber.png"
+        }
+      ]
+    },
+    {
+      "title": "amber piloting",
+      "design": "original/amber",
+      "created": "2025/1",
+      "content": [
+        {
+          "type": "image",
+          "url": "amber2.png"
+        }
+      ]
+    },
+    {
+      "title": "lr7 turbine pheonix",
+      "design": "original",
+      "created": "2025/2",
+      "description": "The only car to win the unlimited class 3 times at the interplanetary 100,000. Cemented in history as the fastest i100k car of all time in 2186 when the unlimited class was banned following a series of fatal crashes.",
+      "content": [
+        {
+          "type": "image",
+          "url": "lr7.png"
+        },
+        {
+          "type": "image",
+          "url": "lr7banner.png"
+        },
+        {
+          "type": "image",
+          "url": "lr73d.png"
+        }
+      ]
+    },
+    {
+      "title": "spaceship 01",
+      "design": "original",
+      "created": "25/2",
+      "content": [
+        {
+          "type": "image",
+          "url": "ship1.png"
+        }
+      ]
+    },
+    {
+      "title": "spaceship 02",
+      "design": "original",
+      "created": "25/2",
+      "content": [
+        {
+          "type": "image",
+          "url": "ship2.png"
+        }
+      ]
+    },
+    {
+      "title": "spaceship 03",
+      "design": "original",
+      "created": "25/2",
+      "content": [
+        {
+          "type": "image",
+          "url": "ship3.png"
+        }
+      ]
+    },
+    {
+      "title": "spaceship 04",
+      "design": "original",
+      "created": "25/2",
+      "content": [
+        {
+          "type": "image",
+          "url": "ship4.png"
+        }
+      ]
+    },
+    {
+      "title": "exploration",
+      "design": "original",
+      "created": "25/2",
+      "content": [
+        {
+          "type": "image",
+          "url": "exploration.png"
+        }
+      ]
+    },
+    {
+      "title": "robot girl",
+      "design": "original",
+      "created": "25/2",
+      "content": [
+        {
+          "type": "image",
+          "url": "robotgirl.png"
+        },
+        {
+          "type": "image",
+          "url": "robotgirl2.png"
+        }
+      ]
+    },
+    {
+      "title": "icewar soldiers",
+      "design": "original",
+      "created": "25/4",
+      "content": [
+        {
+          "type": "image",
+          "url": "europa-icewar.png"
+        }
+      ]
+    },
+    {
+      "design": "original",
+      "created": "25/4",
+      "content": [
+        {
+          "type": "image",
+          "url": "dg2.png"
+        }
+      ]
+    },
+    {
+      "title": "variable geometry fighter",
+      "design": "original",
+      "created": "25/5",
+      "content": [
+        {
+          "type": "image",
+          "url": "transform.png"
+        }
+      ]
+    }
+  ]
 }
