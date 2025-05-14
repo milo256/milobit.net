@@ -27,26 +27,6 @@ body {
     font-size: 12px;
 }
 
-.card, .card:hover {
-    color: var(--textp);
-    text-decoration: none;
-}
-
-.card h3 {
-    margin: 4px 0 2px;
-}
-
-.card:hover h1 {
-    text-decoration: underline;
-}
-
-.image-count-label {
-    position: absolute;
-    padding: 0 8px;
-    background-color: var(--bgbase);
-}
-
-
 h1, h2 {
     text-align: center;
     border-bottom: 1px solid var(--borderl);
@@ -107,7 +87,6 @@ div.wrapping {
     flex-wrap: wrap;
 }
 
-
 div.window {
     margin: 4px 4px;
     padding: 0px 5px 3px;
@@ -116,10 +95,6 @@ div.window {
     background-color: var(--bgwin);
     border: 1px solid var(--borderl);
     box-shadow: 5px 5px var(--shadebase);
-}
-
-div.fullwidth {
-    width: auto;
 }
 
 div.window div.window {
@@ -137,31 +112,6 @@ div.paper > :is(img, div) {
     border: 1px solid var(--borderbga);
 }
 
-table.prices {
-    text-wrap: nowrap;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-table.prices th, table.prices td {
-    border-bottom: 1px solid var(--borderl);
-}
-
-table.prices td {
-    text-align: right;
-}
-
-ul.plist {
-    margin: 0px 20px 30px;
-    padding: 0;
-    list-style-type: none;
-}
-
-ul.plist > * {
-    border-top: 1px solid var(--borderl);
-    padding: 6px 0;
-}
-
 .hnav {
     overflow: scroll;
     text-wrap: nowrap;
@@ -176,9 +126,23 @@ ul.plist > * {
     border-right: 1px solid var(--borderl);
 }
 
-@keyframes splash {
-    from { scale: 1.0 }
-    to { scale: 1.08 }
+.card, .card:hover {
+    color: var(--textp);
+    text-decoration: none;
+}
+
+.card h3 {
+    margin: 4px 0 2px;
+}
+
+.card:hover h1 {
+    text-decoration: underline;
+}
+
+.image-count-label {
+    position: absolute;
+    padding: 0 8px;
+    background-color: var(--bgbase);
 }
 
 #gallery-wrapper {
@@ -187,34 +151,7 @@ ul.plist > * {
     align-items: start;
 }
 
-#splash-text a {
-    color: #ebcb8b;
-}
-
-#splash-text {
-    z-index: 1;
-    color: #ebcb8b;
-    display: inline-block;
-    position: absolute;
-    width: 200px;
-    text-align: center;
-    right: -50px;
-    top: 20px;
-    rotate: -25deg;
-    animation-name: splash;
-    animation-duration: 0.4s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-timing-function: ease-in;
-}
-
 @media screen and (max-width: 640px) {
-    #splash-text {
-        rotate: 5deg;
-        width: 160px;
-        top: 18px;
-        right: -10px;
-    }
     #gallery-wrapper {
         flex-direction: column-reverse;
         align-items: stretch;
