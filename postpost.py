@@ -4,50 +4,48 @@ import os, sys, shutil, subprocess, argparse, json
 
 THUMB_MAX_SIZE = 360
 
+def post_info_msg(post, msg):
+    print(f'{post['filename']} ({post.get('title', 'no title')}): {msg}')
+
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--build', action='store_true')
+    parser.add_argument('--dry-run', action='store_true', help='run without altering any files')
+    parser.add_argument('--force-rebuild', action='store_true', help='ignore timestamps and rebuild all files')
+
 
     return parser.parse_args(sys.argv[1:])
 
 
-def process_element(post, index):
-    elem = post['content'][index]
-
-    match elem['type']:
-        case 'image':
-            post['image_count'] += 1
-            if 'thumbnail' not in post:
-                post['thumbnail'] = elem['url']
-
-            url = elem.get('url')
-            alt = elem.get('alt')
-
-            if url:
-                resources.append(url)
-
-            ret = ' '.join([
-                '<a',
-                f'href = "{url}"' if url else '',
-                '><img style="width: 100%;"',
-                f'src = "{url}"' if url else '',
-                f'alt = "{alt}"' if alt else '',
-                '></a>'
-            ])
-        case 'text':
-            ret = elem.get('text', '')
-    return ret
+def is_up_to_date(a, b):
+    if force_rebuild:
+        return False
+    return os.path.exists(a) and os.path.getmtime(a) > os.path.getmtime(b)
 
 
 def process_post(index):
     post = catalog[index]
-    elem_str_list = []
-    
-    post['image_count'] = 0
-    for i in range(0, len(post.get('content', []))):
-        elem_str_list.append(process_element(post, i))
+    content = ""
 
-    content = ''.join(elem_str_list)
+    if 'image' in post:
+        post['images'] = [post['image']]
+
+    for image in post['images']:
+        url = image if type(image) == str else image['url']
+        alt = image.get('alt') if type(image) == dict else None
+
+        if 'thumbnail' not in post:
+            post['thumbnail'] = url
+
+        content += ' '.join([
+            '<a',
+            f'href = "{url}"' if url else '',
+            '><img style="width: 100%;"',
+            f'src = "{url}"' if url else '',
+            f'alt = "{alt}"' if alt else '',
+            '></a>'
+        ])
+    
+
     title = post.get('title', 'no title')
     desc = post.get('description', 'no description')
     prev = None if index == 0 else f'{index - 1:03}.html'
@@ -71,16 +69,10 @@ def process_post(index):
             '</--template>'
         )
 
-def make_thumb(post):
-    thumb_src = os.path.join(resource_dir, post['thumbnail'])
-    thumb_dst = os.path.join(output_dir, 'thumbs', post['thumbnail'])
-    subprocess.run([
-        'magick', thumb_src, '-strip', '-resize',
-        f'{THUMB_MAX_SIZE}x', thumb_dst
-    ])
 
 def make_preview(index):
     post = catalog[index]
+    image_count = len(post['images'])
     if 'thumbnail' in post:
         thumb_path = os.path.join('thumbs', post['thumbnail'])
     title = post.get('title', 'untitled')
@@ -89,35 +81,12 @@ def make_preview(index):
         <h1>{index:03}</h1>
         <h3>{title}</h3>
         {('<span class="image-count-label">1/'
-            + str(post['image_count'])
-            + '</span>') if post['image_count'] > 1 else ''
+            + str(image_count)
+            + '</span>') if image_count > 1 else ''
         }
         {f'<img src="{thumb_path}" style="width: 100%">' if 'thumbnail' in post else ''}
     </div></a>"""
 
-
-args = parse_args()
-
-with open('posts.json') as file:
-    posts_text = file.read()
-
-decoder = json.JSONDecoder()
-posts_data = decoder.decode(posts_text)
-
-output_dir = posts_data['output_dir']
-resource_dir = posts_data['resource_dir']
-catalog = posts_data['catalog']
-resources = []
-
-
-for i in range(0, len(catalog)):
-    process_post(i)
-
-previews = []
-page_count = 0
-
-POSTS_PER_PAGE = 8
-COLUMNS = 2
 
 def even_groups(total, divisor):
     ret = [int(total/divisor)] * divisor
@@ -125,14 +94,72 @@ def even_groups(total, divisor):
         ret[i] += 1
     return ret
 
+
+def write_thumb(post):
+    if 'thumbnail' not in post:
+        return
+    thumb_src = os.path.join(resource_dir, post['thumbnail'])
+    thumb_dst = os.path.join(output_dir, 'thumbs', post['thumbnail'])
+
+    if not dry_run:
+        good_files.append(thumb_dst)
+
+    if is_up_to_date(thumb_dst, thumb_src):
+        return
+
+    if not dry_run:
+        subprocess.run([
+            'magick', thumb_src, '-strip', '-resize',
+            f'{THUMB_MAX_SIZE}x', thumb_dst
+        ])
+    post_info_msg(post, f'generated thumbnail from {post['thumbnail']}')
+
+
+def write_images(post):
+    if not 'images' in post: return
+
+    for file in post['images']:
+        src_path = os.path.join(resource_dir, file)
+        dst_path = os.path.join(output_dir, file)
+
+        if not dry_run:
+            good_files.append(dst_path)
+
+        if not is_up_to_date(dst_path, src_path):
+            if not dry_run:
+                shutil.copyfile(src_path, dst_path)
+            post_info_msg(post, f'image added: {file}')
+
+
+
 def write_post(index):
     post = catalog[index]
     path = os.path.join(output_dir, post['filename'])
-    if 'thumbnail' in post:
-        make_thumb(post)
+    good_files.append(path)
+
+    write_images(post)
+    write_thumb(post)
+
     previews.append(make_preview(index))
-    with open(path, 'w') as f:
-        f.write(post['html'])
+
+    replace = os.path.exists(path)
+    
+    if replace:
+        with open(path, 'r') as f:
+            if post['html'] == f.read():
+                return
+    
+    if not dry_run:
+        with open(path, 'w') as f:
+            f.write(post['html'])
+        
+    if replace:
+        post_info_msg(post, 'post updated')
+    else:
+        post_info_msg(post, 'post added')
+
+
+
 
 def write_gallery(page_index):
     index_path = os.path.join(
@@ -157,6 +184,8 @@ def write_gallery(page_index):
             + (f'<a href="{next}">next -></a>' if next else '')
         }'
 
+    if dry_run: return
+
     with open(index_path, 'w') as f:
         f.write('<--template --name="basic-page" $title="art gallery">'
                 '<div id="gallery-wrapper">'
@@ -179,27 +208,65 @@ def write_gallery(page_index):
                 '</div>'
                 '</--template>'
             )
-
-if args.build:
-    if os.path.isdir(output_dir):
-        shutil.rmtree(output_dir)
-    os.makedirs(os.path.join(output_dir, 'thumbs'))
-
-    for res in resources:
-        src_path = os.path.join(resource_dir, res)
-        dst_path = os.path.join(output_dir, res)
-        shutil.copyfile(src_path, dst_path)
-    for i in range(len(catalog)):
-        write_post(i)
     
-    previews.reverse()
+    good_files.append(index_path)
 
-    page_count = int(len(previews)/POSTS_PER_PAGE)
-    if len(previews) % POSTS_PER_PAGE:
-        page_count += 1
 
-    for i in range(0, page_count):
-        write_gallery(i)
+args = parse_args()
+
+with open('posts.json') as file:
+    posts_text = file.read()
+
+decoder = json.JSONDecoder()
+posts_data = decoder.decode(posts_text)
+
+output_dir = posts_data['output_dir']
+resource_dir = posts_data['resource_dir']
+catalog = posts_data['catalog']
+good_files = []
+
+dry_run = args.dry_run
+force_rebuild = args.force_rebuild
+
+
+for i in range(0, len(catalog)):
+    process_post(i)
+
+previews = []
+page_count = 0
+
+POSTS_PER_PAGE = 8
+COLUMNS = 2
+
+if not dry_run:
+    thumb_path = os.path.join(output_dir, 'thumbs')
+    os.makedirs(thumb_path, exist_ok=True)
+    good_files.append(thumb_path)
+
+
+for i in range(len(catalog)):
+    write_post(i)
+
+previews.reverse()
+
+page_count = int(len(previews)/POSTS_PER_PAGE)
+if len(previews) % POSTS_PER_PAGE:
+    page_count += 1
+
+for i in range(0, page_count):
+    write_gallery(i)
+
+print(f'{len(previews)} previews written ({page_count} pages)')
+
+if not dry_run:
+    for (root, dirnames, filenames) in os.walk(output_dir):
+        for filename in filenames:
+            path = os.path.join(root, filename)
+            if path not in good_files:
+                print(f'stray file in build directory: {path}')
+
+if dry_run:
+    print('DRY RUN - no files altered')
 
 
 

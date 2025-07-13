@@ -24,6 +24,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: Install ImageMagick
+        run: apt install imagemagick
 
       - name: Set up Python
         uses: actions/setup-python@v5 
