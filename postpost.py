@@ -108,10 +108,17 @@ def write_thumb(post):
         return
 
     if not dry_run:
-        subprocess.run([
-            'magick', thumb_src, '-strip', '-resize',
-            f'{THUMB_MAX_SIZE}x', thumb_dst
-        ])
+        try:
+            subprocess.run([
+                'magick', thumb_src, '-strip', '-resize',
+                f'{THUMB_MAX_SIZE}x', thumb_dst
+            ])
+        except FileNotFoundError:
+            subprocess.run([
+                'convert', thumb_src, '-strip', '-resize',
+                f'{THUMB_MAX_SIZE}x', thumb_dst
+            ])
+
     post_info_msg(post, f'generated thumbnail from {post['thumbnail']}')
 
 
