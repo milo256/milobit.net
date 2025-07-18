@@ -118,6 +118,12 @@
       "design": "original/caroline",
       "created": "2025/7",
       "image": "caroline.png"
+    },
+    {
+      "title": "spaceship 05",
+      "design": "original",
+      "created": "2025/7",
+      "image": "drawpile_ship.png"
     }
   ]
 }
