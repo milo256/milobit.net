@@ -124,6 +124,12 @@
       "design": "original",
       "created": "2025/7",
       "image": "drawpile_ship.png"
+    },
+    {
+      "title": "combat doll",
+      "design": "original",
+      "created": "2025/7",
+      "image": "doll2.png"
     }
   ]
 }
