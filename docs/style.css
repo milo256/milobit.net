@@ -62,32 +62,32 @@ a {
 
 a:hover { text-decoration-line: underline; }
 
-div.horizontal {
+.horizontal {
     display: flex;
     flex-direction: row;
 }
 
-div.vertical {
+.vertical {
     display: flex;
     flex-direction: column;
 }
 
-div.centered {
+.centered {
     display: flex;
     justify-content: center;
 }
 
-div.align-start {
+.align-start {
     display: flex;
     align-items: start;
 }
 
-div.wrapping {
+.wrapping {
     display: flex;
     flex-wrap: wrap;
 }
 
-div.window {
+.window {
     margin: 4px 4px;
     padding: 0px 5px 3px;
     position: relative;
@@ -95,21 +95,6 @@ div.window {
     background-color: var(--bgwin);
     border: 1px solid var(--borderl);
     box-shadow: 5px 5px var(--shadebase);
-}
-
-div.window div.window {
-    box-shadow: 3px 3px var(--shadewin);
-}
-
-div.paper {
-    background-color: var(--bga);
-    border: 1px solid var(--borderbga);
-    color: var(--textbga);
-}
-
-div.paper > :is(img, div) {
-    background-color: var(--bgac);
-    border: 1px solid var(--borderbga);
 }
 
 .hnav {
@@ -143,6 +128,22 @@ div.paper > :is(img, div) {
     position: absolute;
     padding: 0 8px;
     background-color: var(--bgbase);
+}
+
+#picture-frame {
+    background-color: var(--bga);
+    border: 1px solid var(--borderbga);
+    box-shadow: 3px 3px var(--shadewin);
+    margin: 12px 8px;
+    padding: 6px;
+    display: inline-block;
+    rotate: 4deg;
+}
+
+#picture-frame > img {
+    background-color: var(--bgac);
+    border: 1px solid var(--borderbga);
+    margin-bottom: -3px;
 }
 
 #gallery-wrapper {
