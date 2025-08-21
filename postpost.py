@@ -170,7 +170,7 @@ def write_post(index):
 
 def write_gallery(page_index):
     index_path = os.path.join(
-            output_dir, 'index.html' if page_index == 0 else f'index{page_index + 1}.html'
+            output_dir, 'index.html' if page_index == 0 else f'page{page_index + 1}.html'
         )
     columns_html = ""
     previews_start = page_index * POSTS_PER_PAGE
@@ -184,8 +184,8 @@ def write_gallery(page_index):
             )
         previews_start += n
     
-    prev = None if page_index == 0 else '.' if page_index == 1 else f'index{page_index}.html'
-    next = None if page_index == page_count - 1 else f'index{page_index + 2}.html'
+    prev = None if page_index == 0 else '.' if page_index == 1 else f'page{page_index}.html'
+    next = None if page_index == page_count - 1 else f'page{page_index + 2}.html'
     nav_buttons_html = f'{
             (f'<a href="{prev}"><- prev</a> ' if prev else '')
             + (f'<a href="{next}">next -></a>' if next else '')
