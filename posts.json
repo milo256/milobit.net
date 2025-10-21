@@ -130,6 +130,18 @@
       "design": "original",
       "created": "2025/7",
       "image": "doll2.png"
+    },
+    {
+      "title": "southern pacific A-12",
+      "design": "nonfiction",
+      "created": "2025/10",
+      "image": "cabforward.png"
+    },
+    {
+      "title": "cozy robot",
+      "design": "original",
+      "created": "2025/10",
+      "image": "cozy.png"
     }
   ]
 }
