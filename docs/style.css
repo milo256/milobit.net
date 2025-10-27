@@ -31,6 +31,13 @@ hr {
     color: var(--borderl);
 }
 
+.copybox {
+    max-width: 160px;
+    height: 31px;
+    overflow: scroll;
+    background-color: var(--bgbase);
+}
+
 h1, h2 {
     text-align: center;
     border-bottom: 1px solid var(--borderl);
