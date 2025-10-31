@@ -214,6 +214,14 @@ a:hover { text-decoration-line: underline; }
     text-shadow: 1px 1px 0px var(--shadewin);
     background-image: linear-gradient(0deg,rgba(26, 27, 33, 0.62) 0%, rgba(59, 66, 82, 0) 21%, rgba(172, 210, 237, 0.11) 57%, rgba(175, 223, 242, 0.27) 95%, rgba(235, 253, 255, 0.77) 100%);
 }
+button.green-button:hover {
+    text-shadow: 1px 1px 0px var(--shadewin);
+    background-image: linear-gradient(0deg,rgba(26, 27, 33, 0.62) 0%, rgba(59, 66, 82, 0) 21%, rgba(205, 237, 172, 0.11) 57%, rgba(209, 242, 175, 0.27) 95%, rgba(245, 255, 235, 0.77) 100%);
+}
+button.blue-button:hover {
+    text-shadow: 1px 1px 0px var(--shadewin);
+    background-image: linear-gradient(0deg,rgba(26, 27, 33, 0.62) 0%, rgba(59, 66, 82, 0) 21%, rgba(172, 210, 237, 0.11) 57%, rgba(175, 223, 242, 0.27) 95%, rgba(235, 253, 255, 0.77) 100%);
+}
 
 .hnav {
     overflow: scroll;
