@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>my art</title>
+<link rel="stylesheet" href='/style.css'>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+
+<div id="top-bar" class="centered">
+    <div>
+        <div>
+            <a id="home-button" href="/"><- home</a>
+            <div class="sep"></div>
+            <b>MY ART</b>
+        </div>
+        <div style="gap: 6px;">
+            <--field --name="prev">
+            <--field --name="page-number">/<--field --name="page-count">
+            <--field --name="next">
+        </div>
+    </div>
+</div>
+<div id="top-banner"></div>
+<div class="horizontal centered align-start">
+    <!--<div class="vertical" style="flex: auto; max-width: 480px">-->
+        <--inner-html>
+        <!--</div>-->
+</div>
+
+<footer>
+    <p>milobit.net - est 2024</p>
+</footer>
+<style>
+    #home-button {
+        text-wrap: nowrap;
+        padding-right: 10px;
+        position: absolute;
+        right: 100%;
+    }
+    .sep {
+        display: inline-block;
+        width: 1px;
+        margin-right: 8px;
+        height: 100%;
+        background-color: var(--borderl);
+    }
+    #top-bar div {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+    #top-bar > div {
+        box-sizing: border-box;
+        position: relative;
+        color: var(--textl);
+        flex: auto;
+        max-width: 432px;
+        justify-content: space-between;
+    }
+    #top-bar h3 {
+        color: var(--textl);
+    }
+    @media screen and (max-width: 540px) {
+        #top-bar > div {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        #home-button {
+            position: static;
+        }
+    }
+</style>
+</body>
+</html>

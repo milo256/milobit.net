@@ -1,102 +1,334 @@
-<--template --name="basic-page" --fields="title: milo's homepage">
-<div class="vertical" style="flex: auto; max-width: 480px">
-    <div class="window">
-        <span id="splash-text">i support your decision to disallow javascript</span>
-        <h1>home page</h1>
-        <div id="picture-frame">
-            <img src="graphics/arch-chan.png" alt="milo's webbed site" width=160>
-        </div>
-        <h3>welcome!</h3>
-        <p>
-            to my homepage. I'm milo, a hobbyist artist and programmer.
-            On this website you can find links to my socials and a gallery of the
-            artwork I'm most proud of. Refresh the page to change the splash text.
-        </p>
-        <p>
-        <a href="https://milobyte.atabook.org">sign the guestbook!</a>
-        </p>
-        <p>
-        <a href="https://github.com/milo256/milobit.net">source code for this website</a>
-        </p>
-    </div>
-    <div class="horizontal align-start wrapping">
-        <div class="vertical" style="width: 160px; flex: 1 0 auto;">
-            <div class="window" style="text-wrap: nowrap;">
-                <h1>web friends</h1>
-                <a href='https://insect.christmas'><img src='/graphics/insect.christmasbutton.jpg'></a>
-                <a href='https://pink-luva.neocities.org/'><img src='/graphics/ae.jpg'></a>
-                <br>
-                <a href='https://darkuss.twoexem.com/'><img src='/graphics/delta_banner.png'></a>
-                <br>
-                <a href='https://dilongparadoxus.com'>dilong-paradoxus</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>milo's homepage</title>
+<link rel="stylesheet" href='/style.css'>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+<div id="top-bar"></div>
+<div id="top-banner"></div>
+<div class="horizontal centered align-start" style="margin-top: 80px;">
+    <div class="vertical" style="flex: auto; max-width: 540px">
+        <div class="horizontal">
+            <div class="vertical" style="margin-top: 4px;">
+                <a class="button-shadow" href="https://bsky.app/profile/milobit.net">
+                    <div class="bouncer">
+                        <div class="squarish-button" id="bluesky">
+                            <img height=56 alt="bsky" src='graphics/bsky.gif'>
+                        </div>
+                    </div>
+                </a>
+                <a class="button-shadow" href="https://tumblr.com/milobyte">
+                    <div class="bouncer">
+                        <div class="squarish-button" id="tumblr">
+                            <img height=36 alt="tumblr" src='graphics/tumblr-logo.png'>
+                        </div>
+                    </div>
+                </a>
+                <a class="button-shadow" href="https://sunny.garden/@milobyte">
+                    <div class="bouncer">
+                        <div class="squarish-button" id="fediverse">
+                            <img height=36 alt="fedi" src='graphics/fediverse-logo.png'>
+                        </div>
+                    </div>
+                </a>
+                <a href="/misc.html">more...</a>
             </div>
-            <div class="window">
-                <h1>add me to your site!</h1>
-                <div class="horizontal" style="margin-top: 4px;">
-                    <a href='/'><img src='/badge.gif'></a>
-                    <div class="copybox" style="margin-left: 4px;"><span>&lta href='https://milobit.net'>&ltimg src='https://milobit.net/badge.gif'>&lt/a></span></div>
+            <div class="vertical">
+                <img src="graphics/logo.png" height=50 width=270>
+                <div style="position: relative;">
+                    <span id="splash-text">i support your decision to disallow javascript</span>
+                </div>
+                <div class="window" id="better-on-desktop">
+                    <h3>better on desktop!</h3>
+                </div>
+                <div class="window" id="main-window">
+                    <img height=188 id="mascott" src="graphics/mascott.png">
+                    <!--
+                    <h1>home page</h1>
+                    <div id="picture-frame">
+                        <img src="graphics/arch-chan.png" alt="milo's webbed site" width=160>
+                    </div>
+                    -->
+                    <h3>welcome!</h3>
+                    <p>
+                        to my homepage. I'm milo, a hobbyist artist and programmer.
+                        On this website you can find links to my socials and a gallery of the
+                        artwork I'm most proud of. Refresh the page to change the splash text.
+                    </p>
+                    <p>
+                    <a href="https://milobyte.atabook.org">sign the guestbook!</a>
+                    </p>
+                    <p>
+                    <a href="https://github.com/milo256/milobit.net">source code for this website</a>
+                    </p>
+                    <div id="badgebox">
+                        hotlink my button!
+                        <div class="horizontal" style="height: 31px;">
+                            <a href='/'><img src='/badge.gif'></a>
+                            <div id="badgecode"><span>&lta href='https://milobit.net'>&ltimg src='https://milobit.net/badge.gif'>&lt/a></span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="vertical" style="flex: 1 0 auto;">
-            <div class="window">
-                <h1>me</h1>
-                <b>pronouns:</b> he/him<br>
-                <b>location:</b> USA<br>
-                <b>uptime:</b> 21 yrs<br>
-                <b>vehicle:</b> volvo 245<br>
-                <b>OS:</b> arch linux<br>
-                <b>text editor:</b> neovim<br>
-                <hr>
+        <div id="lower-split" class="horizontal align-start">
+            <div class="vertical" style="width: 220px; flex: 0 0 auto;">
+                <div class="window">
+                    <h1>web friends</h1>
+                    <div class="badgescroller"> 
+                        <div class="badges">
+                            <a href='https://insect.christmas'><img src='/graphics/insect.christmasbutton.jpg'></a>
+                            <a href='https://pink-luva.neocities.org/'><img src='/graphics/ae.jpg'></a>
+                            <a href='https://darkuss.twoexem.com/'><img src='/graphics/delta_banner.png'></a>
+                            <a href='https://dilongparadoxus.com'><div class="fakebadge">dilong<br>paradoxus</div></a>
+                            <div style="width: 30px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="window">
+                    <h1>about me</h1>
+                    <b>pronouns:</b> he/him<br>
+                    <b>location:</b> USA<br>
+                    <b>uptime:</b> 21 yrs<br>
+                    <b>vehicle:</b> volvo 245<br>
+                    <b>OS:</b> arch linux<br>
+                    <b>text editor:</b> neovim<br>
+                </div>
+            </div>
+            <div id="lower-buttons-container">
+                <a class="button-shadow" href="/art">
+                    <div class="green-button">
+                        my art ->
+                    </div>
+                </a>
+                <a class="button-shadow" href="/com">
+                    <div class="blue-button">
+                        commissions ->
+                    </div>
+                </a>
+                <a class="button-shadow" href="/misc.html">
+                    <div class="blue-button">
+                        misc ->
+                    </div>
+                </a>
+                <a class="button-shadow" href="https://milobyte.atabook.org/">
+                    <div class="blue-button">
+                        guestbook
+                        <svg
+                           width="8"
+                           height="8"
+                           viewBox="0 0 24 24"
+                           style="fill:currentColor;"
+                           xmlns:svg="http://www.w3.org/2000/svg">
+                           <path d="M 0,24 V 4.0010637 H 9.3125 V 6.6892783 H 2.6875 V 21.318167 h 14.625 V 14.691406 H 20 V 24 Z M 9.0630494,13.033799 17.062397,5.0330568 12.031829,0 H 24 v 11.971738 l -5.030973,-5.03231 -8.001214,8.002621 z" />
+                        </svg>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
 </div>
 <script>
     var texts = [
-        ":(){ :|:& };:", "trans rights are human rights!", "minecraft reference", "best viewed with netscape navigator 4.0 or below",
-        "the bee's knees", "the world's best website, some say", "made with only ethically sourced HTML",
+        ":(){ :|:& };:", "trans rights are human rights!", "brought to you by the personal computer", "best viewed with netscape navigator 4.0 or below",
+        "the bee's knees", "no matter where you go, everybody's connected", "also check out milobyte.net", "made with only ethically sourced HTML",
         "brought to you by a series of tubes", "if you can read this, you have javascript enabled", "the website of all time",
         "the last website you'll ever need", "have a nice day!", "click <a href='you-win.html'>the answer</a>", "rock and roll! and stone",
         "<a href='https://github.com/milo256/milobit.net'>free and open source!</a>", "or as i've taken to calling it, GNU + Linux",
-        "100% human-made!", "guaranteed!",
+        "100% synthetic!", "guaranteed!", ":3 :3 :3 :3", "hardware decelerated", "randomly generated", "weapons-grade"
     ];
     document.getElementById("splash-text").innerHTML = texts[Math.floor(Math.random()*texts.length)];
 </script>
 <style>
-@keyframes splash {
-    from { scale: 1.0 }
-    to { scale: 1.08 }
-}
 
-#splash-text a {
-    color: #ebcb8b;
-}
-
-#splash-text {
-    z-index: 1;
-    color: #ebcb8b;
-    display: inline-block;
-    position: absolute;
-    width: 200px;
-    text-align: center;
-    right: -50px;
-    top: 20px;
-    rotate: -25deg;
-    animation-name: splash;
-    animation-duration: 0.4s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-timing-function: ease-in;
-}
-
-@media screen and (max-width: 640px) {
-    #splash-text {
-        rotate: 5deg;
-        width: 160px;
-        top: 18px;
-        right: -10px;
+    #top-banner {
+        border-bottom: 1px solid var(--borderl);
     }
-}
+
+    #main-window {
+        padding-top: 24px;
+        padding-bottom: 12px;
+        background-color: var(--bgbase);
+    }
+
+    #mascott {
+        position: absolute;
+        right: 12px;
+        top: -156px;
+    }
+
+    #lower-buttons-container {
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        transform: translate(80px, -120px);
+    }
+
+    #better-on-desktop {
+        background-color: var(--bglight);
+        display: none;
+    }
+    
+
+    #splash-text a {
+        color: #d1f2af;
+    }
+
+    #splash-text {
+        z-index: 1;
+        color: #d1f2af;
+        display: inline-block;
+        position: absolute;
+        width: 200px;
+        text-align: center;
+        left: 140px;
+        top: -20px;
+        rotate: -25deg;
+        animation-name: splash;
+        animation-duration: 0.4s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in;
+    }
+
+
+    @keyframes splash {
+        from { scale: 1.0 }
+        to { scale: 1.08 }
+    }
+
+    @keyframes slide-across {
+        from { transform: none; }
+        to { transform: translateX(-200%); }
+    }
+
+    .badgescroller {
+        height: 31px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        border-right: 1px solid var(--borderl);
+    }
+    
+    .badges {
+        display: flex;
+    }
+
+    .badgescroller:not(:hover) > .badges > *  {
+        animation: slide-across 10s alternate linear infinite;
+    }
+
+    .fakebadge {
+        width: 88px;
+        line-height: 12px;
+        height: 31px;
+        box-sizing: border-box;
+        border: 1px solid var(--texta);
+    }
+
+    
+    .squarish-button {
+        position: relative;
+        text-align: left;
+        border: 1px solid var(--borderl);
+        width: 56px;
+        height: 48px;
+        box-sizing: border-box;
+        transition: transform 0.1s linear;
+    }
+
+    #bluesky {
+        background-color: var(--bgac);
+        color: #4682B4
+    }
+
+    #bluesky > img {
+        transform: translate(-6px, -12px);
+    }
+
+    #tumblr {
+        padding: 2px 0px 0px 4px;
+        background-color: #2c3b4c;
+        color: var(--textc);
+    }
+
+    #tumblr > img {
+        animation: bob 2s alternate infinite;
+    }
+
+    #fediverse {
+        padding: 4px 0px 0px 4px;
+        background-color: #121212;
+    }
+
+    #fediverse > img {
+        animation: spin 18s linear infinite;
+    }
+
+    @keyframes bob {
+        from {transform: translateY(2px)}
+        to {transform: translateY(-2px)}
+    }
+    @keyframes rock {
+        from {rotate: -4deg}
+        to {rotate: 4deg}
+    }
+    @keyframes spin {
+        from {rotate: -180deg}
+        to {rotate: 180deg}
+    }
+
+    #badgebox {
+        background-color: #20242D;
+        padding-right: 20px;
+        color: #b8bec9;
+        width: 220px;
+        padding-bottom: 1px;
+    }
+    #badgecode {
+        height: 32px;
+        background-color: var(--bgdarker);
+        color: var(--borderl);
+        overflow: scroll;
+    }
+    
+    @media screen and (max-width: 540px) {
+        #mascott {
+            display: none; /* ): */
+        }
+        #top-banner {
+            height: 80px;
+            margin-bottom: -80px;
+        }
+        #lower-split {
+            flex-direction: column-reverse;
+        }
+        #lower-buttons-container {
+            z-index: 1;
+            transform: none;
+            width: 100%;
+            align-items: stretch;
+            flex-direction: row;
+        }
+        #lower-buttons-container > * {
+            flex: 1 1 auto;
+        }
+        .green-button, .blue-button {
+            width: auto;
+            max-height: 33px;
+        }
+        .green-button {
+            padding: 6px 12px;
+        }
+        #better-on-desktop {
+            display: block;
+        }
+    }
 </style>
-</--template>
+
+<footer>
+    <p>milobit.net - est 2024</p>
+</footer>
+</body>
+</html>

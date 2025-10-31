@@ -191,10 +191,16 @@ def write_gallery(page_index):
             + (f'<a href="{next}">next -></a>' if next else '')
         }'
 
+    prev_html = f'<a href=\'{prev}\'><- prev</a> ' if prev else ''
+    next_html = f'<a href=\'{next}\'>next -></a> ' if next else ''
+
     if dry_run: return
 
     with open(index_path, 'w') as f:
-        f.write('<--template --name="basic-page" $title="art gallery">'
+        f.write('<--template --name="art-gallery" '
+                    f'$prev="{prev_html}" $next="{next_html}" '
+                    f'$page-number="{page_index + 1}" '
+                    f'$page-count="{page_count}">'
                 '<div id="gallery-wrapper">'
                 '<div class="vertical" style="align-items: center;">'
                         '<div class="horizontal" style="flex-wrap: wrap">'
@@ -202,14 +208,6 @@ def write_gallery(page_index):
                         '</div>'
                         '<div class="window hnav">'
                             f'{nav_buttons_html} <a href="#">back to top</a>'
-                        '</div>'
-                    '</div>'
-                    '<div class="vertical" id="gallery-info">'
-                        '<div class="window">'
-                            '<h1>art gallery</h1>'
-                            f'page {page_index + 1}/{page_count}'
-                            '<br>'
-                            f'{nav_buttons_html}'
                         '</div>'
                     '</div>'
                 '</div>'

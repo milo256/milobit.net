@@ -6,18 +6,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-    <div class="horizontal centered">
-    <div class="vertical" style="max-width: 900px;">
-        <div style="width: auto; display: flex;">
-        <div class="window hnav" style="nowrap; width: 0; flex: 1;">
-            <h2 class="inline">nav</h2><a href="/">home</a><a href="/art">gallery</a><a href="/com">commissions</a><a href="https://milobyte.atabook.org">guestbook</a>
-        </div>
-        </div>
-        <--inner-html>
+    <div id="top-bar" class="centered">
+        <a href='/art/<--field --name="gallery-page" --default="">'>&lt- back to gallery</a>
+        <div class="sep"></div>
+        <a href='/'>&lt- home</a>
     </div>
+    <div class="horizontal centered">
+        <div class="vertical" style="max-width: 900px;">
+            <--inner-html>
+        </div>
     </div>
 <footer>
     <p>milobit.net - est 2024</p>
 </footer>
+<style>
+    .sep {
+        display: inline-block;
+        width: 1px;
+        margin-left: 8px;
+        margin-right: 8px;
+        height: 100%;
+        background-color: var(--borderl);
+    }
+    #top-bar {
+        padding-left: 8px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+    }
+</style>
 </body>
 </html>
