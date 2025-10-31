@@ -204,16 +204,24 @@
         to { transform: translateX(-200%); }
     }
 
+    .badgescroller::-webkit-scrollbar { display: none; }
+
     .badgescroller {
         height: 31px;
         overflow-x: scroll;
         overflow-y: hidden;
+        scrollbar-width: none;
         border-right: 1px solid var(--borderl);
     }
     
     .badges {
         display: flex;
     }
+    
+    .badgescroller:not(:hover) {
+        overflow: hidden;
+    }
+    
 
     .badgescroller:not(:hover) > .badges > *  {
         animation: slide-across 10s alternate linear infinite;
@@ -286,11 +294,18 @@
         width: 220px;
         padding-bottom: 1px;
     }
+
+    #badgecode::-webkit-scrollbar { display: none; }
+
     #badgecode {
         height: 32px;
+        scrollbar-width: none;
         background-color: var(--bgdarker);
         color: var(--borderl);
         overflow: scroll;
+    }
+    #badgecode:not(:hover) {
+        overflow: hidden;
     }
     
     @media screen and (max-width: 540px) {
