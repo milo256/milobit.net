@@ -18,7 +18,7 @@
 <div class="horizontal centered align-start" style="margin-top: 70px;">
     <div class="vertical" style="flex: auto; max-width: 540px">
         <div class="horizontal">
-            <div class="vertical" style="margin-top: -20px;">
+            <div class="vertical" id="side-buttons-container">
                 <a class="button-shadow" href="https://bsky.app/profile/milobit.net">
                     <div class="bouncer">
                         <div class="squarish-button" id="bluesky">
@@ -165,6 +165,10 @@
         position: absolute;
         right: 12px;
         top: -156px;
+    }
+
+    #side-buttons-container {
+        margin-top: -20px;
     }
 
     #lower-buttons-container {
@@ -317,6 +321,9 @@
     }
     
     @media screen and (max-width: 540px) {
+        #side-buttons-container {
+            margin-top: 4px;
+        }
         #mascott {
             display: none; /* ): */
         }
