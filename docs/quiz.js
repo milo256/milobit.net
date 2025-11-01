@@ -28,7 +28,7 @@ function question1(quizContent) {
     quizContent.style = "border: 1px solid var(--borderl); padding: 30px 50px; background-color: blue; box-shadow: 5px 5px var(--shadebase);"
     quizContent.onmouseover = function(){ if (!safe_from_blue) {lose()}};
 
-    quizContent.innerHTML = "<button class='green-button' onclick='question2()'>next question</button>"
+    quizContent.innerHTML = "<a class='button-shadow' onclick='question2()'><div class='green-button'>next question</div></a>"
     quizContent.children[0].onmouseover = function(){ safe_from_blue = true; };
     quizContent.children[0].onmouseout = function(){ safe_from_blue = false; };
 }
@@ -115,7 +115,7 @@ function lose() {
     }
     
     const explosion = document.createElement("img");
-    explosion.src = "/graphics/explosion.gif";
+    explosion.src = "/graphics/explosion.gif?nocache=" + Date.now();
     explosion.width = "176";
     explosion.height = "250";
     explosion.style["position"] = "absolute";
