@@ -24,7 +24,14 @@ def is_up_to_date(a, b):
 
 def process_post(index):
     post = catalog[index]
-    content = ""
+    content = ''
+
+    page_index = (len(catalog) - 1 - index) // POSTS_PER_PAGE
+    if page_index == 0:
+        gallery_page = ''
+    else:
+        gallery_page = f'page{page_index+1}.html'
+
 
     if 'image' in post:
         post['images'] = [post['image']]
@@ -54,12 +61,12 @@ def process_post(index):
     post['filename'] = f'{index:03}.html'
 
     post['html'] = (
-            f'<--template --name="post" $title="{title}">'
+            f'<--template --name="post" $title="{title}" $gallery-page="{gallery_page}">'
             '<div class="window">'
                 '<div class="hnav", style="position:absolute; right: 0;">'
                     f'{
                         (f'<a href="{prev}"><- prev</a>' if prev else '')
-                        + f'<span>{(index + 1)}/{len(catalog)}</span>'
+                        + f'<span>{index:03}</span>'
                         + (f'<a href="{next}">next -></a>' if next else '')
                     }'
                 '</div>'
@@ -75,7 +82,7 @@ def make_preview(index):
     image_count = len(post['images'])
     if 'thumbnail' in post:
         thumb_path = os.path.join('thumbs', post['thumbnail'])
-    title = post.get('title', 'untitled')
+    title = post.get('title', 'no title')
     return f"""
     <a href="{index:03}.html" class="card"><div class="window" style="flex: 1 0 auto;">
         <h1>{index:03}</h1>
@@ -233,15 +240,15 @@ good_files = []
 dry_run = args.dry_run
 force_rebuild = args.force_rebuild
 
-
-for i in range(0, len(catalog)):
-    process_post(i)
-
 previews = []
 page_count = 0
 
 POSTS_PER_PAGE = 8
 COLUMNS = 2
+
+for i in range(0, len(catalog)):
+    process_post(i)
+
 
 if not dry_run:
     thumb_path = os.path.join(output_dir, 'thumbs')
