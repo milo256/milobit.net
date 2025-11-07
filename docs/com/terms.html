@@ -1,5 +1,24 @@
-<--template --name="basic-page" --fields="title: milo's commission terms">
-<div style="max-width: 600px;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta property='og:type' content='website'>
+<meta property='og:title' content='milobit.net ▪ commissions'>
+<meta property='og:description' content='‣ info and pricing ‣'>
+<meta property='url' content='https://milobit.net/com'>
+<meta property='og:image' content='https://milobit.net/graphics/amber-banner.png'>
+
+<title>milo's commission terms</title>
+<link rel="stylesheet" href='/style.css'>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+<div id="top-bar">
+    <a href='/'>&lt- home</a>
+    <div class="sep"></div>
+    <a href='/com'>&lt- back to commissions</a>
+</div>
+<div class="horizontal centered align-start"> 
+<div style="max-width: 540px;">
     <div class="window">
         <h1>Milo's Terms of Service V3</h1>
         <p style="margin: 20px 60px 40px;">
@@ -51,16 +70,30 @@
         </div>
     </div>
 </div>
+</div>
 <style>
-ul.plist {
-    margin: 0px 20px 30px;
-    padding: 0;
-    list-style-type: none;
-}
+    .sep {
+        display: inline-block;
+        width: 1px;
+        margin-left: 8px;
+        margin-right: 8px;
+        height: 100%;
+        background-color: var(--borderl);
+    }
+    #top-bar {
+        padding-left: 8px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+    }
+    ul.plist {
+        margin: 0px 20px 30px;
+        padding: 0;
+        list-style-type: none;
+    }
 
-ul.plist > * {
-    border-top: 1px solid var(--borderl);
-    padding: 6px 0;
-}
+    ul.plist > * {
+        border-top: 1px solid var(--borderl);
+        padding: 6px 0;
+    }
 </style>
-</--template>
