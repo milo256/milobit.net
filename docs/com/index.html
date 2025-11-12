@@ -12,7 +12,7 @@
 <link rel="stylesheet" href='/style.css'>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
-<body>
+<body class="closed-toggle">
 <div id="top-bar">
     <div id="top-bar-buttons" style="max-width: 536px;">
         <div class="top-bar-button-group">
@@ -25,7 +25,10 @@
 <div id="top-banner"></div>
 <div class="horizontal centered align-start">
     <div class="vertical" style="max-width: 540px; text-align: left;">
-        <div class="window">
+        <div class="window closed-msg" style="padding: 12px; text-align: center;">
+            COMMISSIONS CLOSED
+        </div>
+        <div class="window main">
             <p>
                 I do digital art commissions!
                 Interested or have a question?
@@ -52,6 +55,16 @@
     </div>
 </div>
 <style>
+.closed-msg {
+    display: none;
+}
+.closed-toggle .closed-msg {
+    display: unset;
+}
+.closed-toggle .main {
+    opacity: 50%;
+    pointer-events: none;
+}
 table.prices {
     text-wrap: nowrap;
     border-collapse: collapse;
