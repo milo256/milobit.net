@@ -64,6 +64,7 @@
                         On this website you can find links to my socials and a gallery of
                         my artwork updated regularly :) Refresh the page to change the splash text.
                     </p>
+                    <br>
                     <p>
                     <a href="https://milobyte.atabook.org">sign the guestbook!</a>
                     </p>
@@ -103,35 +104,43 @@
                     <b>text editor:</b> neovim<br>
                 </div>
             </div>
-            <div id="lower-buttons-container">
-                <a class="button-shadow" href="/art">
-                    <div class="green-button">
-                        my art ->
-                    </div>
-                </a>
-                <a class="button-shadow" href="/com">
-                    <div class="blue-button">
-                        commissions ->
-                    </div>
-                </a>
-                <a class="button-shadow" href="/misc.html">
-                    <div class="blue-button">
-                        misc ->
-                    </div>
-                </a>
-                <a class="button-shadow" href="https://milobyte.atabook.org/">
-                    <div class="blue-button">
-                        guestbook
-                        <svg
-                           width="8"
-                           height="8"
-                           viewBox="0 0 24 24"
-                           style="fill:currentColor;"
-                           xmlns:svg="http://www.w3.org/2000/svg">
-                           <path d="M 0,24 V 4.0010637 H 9.3125 V 6.6892783 H 2.6875 V 21.318167 h 14.625 V 14.691406 H 20 V 24 Z M 9.0630494,13.033799 17.062397,5.0330568 12.031829,0 H 24 v 11.971738 l -5.030973,-5.03231 -8.001214,8.002621 z" />
-                        </svg>
-                    </div>
-                </a>
+            <div class="vertical" style="width: 100%;">
+                <div class="window" id="webrings">
+                    <h1>webrings</h1>
+                    <a href="https://stellophiliac.github.io/roboring/milobit/previous"> <- </a>
+                    <a href="https://stellophiliac.github.io/roboring">roboring (may not work yet)</a>
+                    <a href="https://stellophiliac.github.io/roboring/milobit/next"> -> </a>
+                </div>
+                <div id="lower-buttons-container">
+                    <a class="button-shadow" href="/art">
+                        <div class="green-button">
+                            my art ->
+                        </div>
+                    </a>
+                    <a class="button-shadow" href="/com">
+                        <div class="blue-button">
+                            commissions ->
+                        </div>
+                    </a>
+                    <a class="button-shadow" href="/misc.html">
+                        <div class="blue-button">
+                            misc ->
+                        </div>
+                    </a>
+                    <a class="button-shadow" href="https://milobyte.atabook.org/">
+                        <div class="blue-button">
+                            guestbook
+                            <svg
+                               width="8"
+                               height="8"
+                               viewBox="0 0 24 24"
+                               style="fill:currentColor;"
+                               xmlns:svg="http://www.w3.org/2000/svg">
+                               <path d="M 0,24 V 4.0010637 H 9.3125 V 6.6892783 H 2.6875 V 21.318167 h 14.625 V 14.691406 H 20 V 24 Z M 9.0630494,13.033799 17.062397,5.0330568 12.031829,0 H 24 v 11.971738 l -5.030973,-5.03231 -8.001214,8.002621 z" />
+                            </svg>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -158,7 +167,6 @@
     #main-window {
         padding-top: 24px;
         padding-bottom: 12px;
-        background-color: var(--bgbase);
     }
 
     #mascott {
@@ -171,16 +179,30 @@
         margin-top: -20px;
     }
 
+    #lower-split {
+        position: relative;
+    }
+
     #lower-buttons-container {
         z-index: 1;
         display: flex;
+        position: absolute;
         flex-direction: column;
-        transform: translate(80px, -120px);
+        right: 12px;
+        top: -144px;
+        ttransform: translate(80px, -120px);
     }
 
     #better-on-desktop {
         background-color: var(--bglight);
         display: none;
+    }
+    #webrings {
+        position: relative;
+        right: 0px;
+        bottom: 0px;
+        background-color: var(--bgdark);
+        width: 180px;
     }
     
 
@@ -319,13 +341,16 @@
     #badgecode:not(:hover) {
         overflow: hidden;
     }
-    
+
     @media screen and (max-width: 540px) {
         #side-buttons-container {
             margin-top: 4px;
         }
         #mascott {
             display: none; /* ): */
+        }
+        #webrings {
+            width: auto;
         }
         #top-banner {
             height: 0;
@@ -335,9 +360,8 @@
             flex-direction: column-reverse;
         }
         #lower-buttons-container {
-            z-index: 1;
-            transform: none;
             width: 100%;
+            position: static;
             align-items: stretch;
             flex-direction: row;
         }
@@ -348,7 +372,7 @@
             width: auto;
             max-height: 33px;
         }
-        .green-button {
+        .blue-button {
             padding: 6px 12px;
         }
         #better-on-desktop {
