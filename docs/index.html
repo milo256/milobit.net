@@ -149,7 +149,7 @@
 
     function shuffle(array) {
         for (var i = 0; i < array.length - 2; i++) {
-            const j = i + Math.floor(Math.random() * (array.length - 1 - i));
+            const j = i + 1 + Math.floor(Math.random() * (array.length - 1 - i));
             const tmp = array[i]
             array[i] = array[j]
             array[j] = tmp
