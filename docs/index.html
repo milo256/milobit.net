@@ -147,15 +147,6 @@
     </div>
 </div>
 <script>
-
-    function shuffle(array) {
-        for (var i = 0; i < array.length - 2; i++) {
-            const j = i + 1 + Math.floor(Math.random() * (array.length - 1 - i));
-            const tmp = array[i]
-            array[i] = array[j]
-            array[j] = tmp
-        }
-    }
     // randomize splash text
     var texts = [
         ":(){ :|:& };:", "trans rights are human rights!", "brought to you by the personal computer", "best viewed with netscape navigator 4.0 or below",
@@ -167,6 +158,16 @@
         "effectively prevents side-fumbling", "hand-coded!", "holy fucking bingle. what?!", "ever notice that some of these are clickable?"
     ];
     document.getElementById("splash-text").innerHTML = texts[Math.floor(Math.random()*texts.length)];
+    
+
+    function shuffle(array) {
+        for (var i = 0; i < array.length - 2; i++) {
+            const j = i + 1 + Math.floor(Math.random() * (array.length - 1 - i));
+            const tmp = array[i]
+            array[i] = array[j]
+            array[j] = tmp
+        }
+    }
 
 
     // randomize order of badges
@@ -174,8 +175,6 @@
 
     shuffle(badgesArray);
     badges.innerHTML = "";
-
-    console.log(badgesArray);
 
     for (var i = 0; i < badgesArray.length; i++) {
         badges.appendChild(badgesArray[i]);
