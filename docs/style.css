@@ -160,25 +160,31 @@ a:hover { text-decoration-line: underline; }
     box-shadow: 5px 5px var(--shadebase);
 }
 
-.green-button, .blue-button {
-    width: 120px;
-    background-color: var(--bglight);
+.nav-button {
+    text-align: left;
+    box-sizing: border-box;
+    padding: 2px 8px 16px;
+    background-color: var(--bgdark);
     transition: transform 0.1s linear;
+    border: 1px solid var(--borderl);
 }
 
 .green-button {
-    padding: 12px 12px;
-    border: 1px solid #d1f2af;
+    border-left: 8px solid #d1f2af;
     color: #d1f2af;
 }
 
 .blue-button {
-    min-height: 100%;
-    min-width: 100%;
-    box-sizing: border-box;
-    padding: 6px 12px;
-    border: 1px solid #a1c9f1;
+    border-left: 8px solid #a1c9f1;
     color: #a1c9f1;
+}
+.purple-button {
+    border-left: 8px solid #a2a2f2;
+    color: #a2a2f2;
+}
+.red-button {
+    border-left: 8px solid #f79a96;
+    color: #f79a96;
 }
 
 .button-shadow {
@@ -207,23 +213,10 @@ a:hover { text-decoration-line: underline; }
     animation: bob 0.5s -0.5s alternate ease-out infinite;
 }
 
-.button-shadow:hover > .green-button {
+.button-shadow:hover > .nav-button {
     transform: translate(-4px, -4px);
     text-shadow: 1px 1px 0px var(--shadewin);
-    background-image: linear-gradient(0deg,rgba(26, 27, 33, 0.62) 0%, rgba(59, 66, 82, 0) 21%, rgba(205, 237, 172, 0.11) 57%, rgba(209, 242, 175, 0.27) 95%, rgba(245, 255, 235, 0.77) 100%);
-}
-.button-shadow:hover > .blue-button {
-    transform: translate(-4px, -4px);
-    text-shadow: 1px 1px 0px var(--shadewin);
-    background-image: linear-gradient(0deg,rgba(26, 27, 33, 0.62) 0%, rgba(59, 66, 82, 0) 21%, rgba(172, 210, 237, 0.11) 57%, rgba(175, 223, 242, 0.27) 95%, rgba(235, 253, 255, 0.77) 100%);
-}
-button.green-button:hover {
-    text-shadow: 1px 1px 0px var(--shadewin);
-    background-image: linear-gradient(0deg,rgba(26, 27, 33, 0.62) 0%, rgba(59, 66, 82, 0) 21%, rgba(205, 237, 172, 0.11) 57%, rgba(209, 242, 175, 0.27) 95%, rgba(245, 255, 235, 0.77) 100%);
-}
-button.blue-button:hover {
-    text-shadow: 1px 1px 0px var(--shadewin);
-    background-image: linear-gradient(0deg,rgba(26, 27, 33, 0.62) 0%, rgba(59, 66, 82, 0) 21%, rgba(172, 210, 237, 0.11) 57%, rgba(175, 223, 242, 0.27) 95%, rgba(235, 253, 255, 0.77) 100%);
+    /*background-image: linear-gradient(0deg,rgba(26, 27, 33, 0.62) 0%, rgba(59, 66, 82, 0) 21%, rgba(205, 237, 172, 0.11) 57%, rgba(209, 242, 175, 0.27) 95%, rgba(245, 255, 235, 0.77) 100%);*/
 }
 
 .hnav {
