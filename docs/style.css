@@ -160,32 +160,6 @@ a:hover { text-decoration-line: underline; }
     box-shadow: 5px 5px var(--shadebase);
 }
 
-.nav-button {
-    text-align: left;
-    box-sizing: border-box;
-    padding: 2px 8px 16px;
-    background-color: var(--bgdark);
-    transition: transform 0.1s linear;
-    border: 1px solid var(--borderl);
-}
-
-.green-button {
-    border-left: 8px solid #d1f2af;
-    color: #d1f2af;
-}
-
-.blue-button {
-    border-left: 8px solid #a1c9f1;
-    color: #a1c9f1;
-}
-.purple-button {
-    border-left: 8px solid #a2a2f2;
-    color: #a2a2f2;
-}
-.red-button {
-    border-left: 8px solid #f79a96;
-    color: #f79a96;
-}
 
 .button-shadow {
     margin: 8px 0px 0px 8px;

@@ -18,24 +18,24 @@
 <div class="horizontal centered align-start">
     <div class="vertical" style="flex: auto; max-width: 550px;">
         <img id="logo" src="graphics/logo.png" height=50 width=270>
-        <div id="lower-buttons-container">
+        <div id="nav-buttons-container">
             <a class="button-shadow" href="/art">
-                <div class="nav-button green-button">
+                <div class="nav-button">
                     my art ->
                 </div>
             </a>
             <a class="button-shadow" href="/com">
-                <div class="nav-button blue-button">
+                <div class="nav-button">
                     comms ->
                 </div>
             </a>
             <a class="button-shadow" href="/misc.html">
-                <div class="nav-button purple-button">
+                <div class="nav-button">
                     misc ->
                 </div>
             </a>
             <a class="button-shadow" href="https://milobyte.atabook.org/">
-                <div class="nav-button red-button">
+                <div class="nav-button">
                     guestbook
                     <svg
                        width="8"
@@ -148,7 +148,7 @@
     // randomize splash text
     var texts = [
         ":(){ :|:& };:", "trans rights are human rights!", "brought to you by the personal computer", "best viewed with netscape navigator 4.0 or below",
-        "the bee's knees", "no matter where you go, everybody's connected", "also check out milobyte.net", "made with only ethically sourced HTML",
+        "the bee's knees", "no matter where you go, everybody's connected", "made with only ethically sourced HTML",
         "brought to you by a series of tubes", "if you can read this, you have javascript enabled", "one of the websites of all time",
         "the last website you'll ever need", "have a nice day!", "click <a onclick='startQuiz()'>the answer</a>", "rock and roll! and stone",
         "<a href='https://github.com/milo256/milobit.net'>free and open source!</a>", "or as i've taken to calling it, GNU + Linux",
@@ -208,12 +208,36 @@
         position: relative;
     }
 
-    #lower-buttons-container {
+    #nav-buttons-container {
         display: flex;
         flex-direction: row;
         left: 0px;
         top: 20px;
         /*transform: translate(80px, -120px);*/
+    }
+    .nav-button {
+        text-align: left;
+        box-sizing: border-box;
+        padding: 2px 8px 16px;
+        background-color: var(--bgdark);
+        transition: transform 0.1s linear;
+        border: 1px solid var(--borderl);
+    }
+    .button-shadow:nth-child(1) .nav-button {
+        border-left: 8px solid #d1f2af;
+        color: #d1f2af;
+    }
+    .button-shadow:nth-child(2) .nav-button {
+        border-left: 8px solid #a1c9f1;
+        color: #a1c9f1;
+    }
+    .button-shadow:nth-child(3) .nav-button {
+        border-left: 8px solid #a2a2f2;
+        color: #a2a2f2;
+    }
+    .button-shadow:nth-child(4) .nav-button {
+        border-left: 8px solid #f79a96;
+        color: #f79a96;
     }
 
     #better-on-desktop {

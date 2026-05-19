@@ -5,7 +5,7 @@
 
 
 function startQuiz() {
-    buttonContainer = document.getElementById("lower-buttons-container");
+    buttonContainer = document.getElementById("nav-buttons-container");
 
     var buttons = buttonContainer.children;
 
@@ -28,7 +28,7 @@ function question1(quizContent) {
     quizContent.style = "border: 1px solid var(--borderl); padding: 30px 50px; background-color: blue; box-shadow: 5px 5px var(--shadebase);"
     quizContent.onmouseover = function(){ if (!safe_from_blue) {lose()}};
 
-    quizContent.innerHTML = "<a class='button-shadow' onclick='question2()'><div class='green-button'>next question</div></a>"
+    quizContent.innerHTML = "<a class='button-shadow' onclick='question2()'><div class='nav-button'>next question</div></a>"
     quizContent.children[0].onmouseover = function(){ safe_from_blue = true; };
     quizContent.children[0].onmouseout = function(){ safe_from_blue = false; };
 }
@@ -54,7 +54,7 @@ function question4() {
         var size = 20 * i - 10;
         button.classList.add("button-shadow");
         button.style = "width: " + size + "px; height: " + size + "px; border-radius: " + size/2 + "px;";
-        button.innerHTML = "<div class='green-button' style='padding: 0; width: " + size + "px; height: " + size + "px; border-radius: " + size/2 + "px;'></div>";
+        button.innerHTML = "<div class='nav-button' style='border-left: 1px solid var(--borderl); padding: 0; width: " + size + "px; height: " + size + "px; border-radius: " + size/2 + "px;'></div>";
         button.onclick = lose;
         quizContent.append(button);
     }
@@ -85,7 +85,7 @@ function setOptions() {
         button.style = "border: none";
         button.classList.add("button-shadow");
         button.onclick = lose;
-        button.innerHTML = "<div style='padding: 6px 12px;' class='green-button'>" + arguments[i] + "</div>"
+        button.innerHTML = "<div style='padding: 6px 12px;' class='nav-button'>" + arguments[i] + "</div>"
         quizContent.append(button);
     }
 }
@@ -108,7 +108,7 @@ function lose() {
 
     document.getElementById("quiz-content").remove();
 
-    var buttons = document.getElementById("lower-buttons-container").children;
+    var buttons = document.getElementById("nav-buttons-container").children;
 
     for (var i = 0; i < buttons.length; i++) {
         buttons[i].style["display"] = "unset";
@@ -121,7 +121,7 @@ function lose() {
     explosion.style["position"] = "absolute";
     explosion.style["pointer-events"] = "none";
     explosion.style["z-index"] = 10;
-    document.getElementById("lower-buttons-container").append(explosion.cloneNode());
+    document.getElementById("nav-buttons-container").append(explosion.cloneNode());
 
     const splash_text = document.getElementById("splash-text");
     explosion.style["left"] = "0px";
