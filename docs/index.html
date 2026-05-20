@@ -16,8 +16,8 @@
 </div>
 <div id="top-banner"></div>
 <div class="horizontal centered align-start">
-    <div class="vertical" style="flex: auto; max-width: 550px;">
-        <img id="logo" src="graphics/logo.png" height=50 width=270>
+    <div class="vertical" style="flex: auto; max-width: 550px; min-width: 0;">
+        <img id="logo" src="graphics/logo.png" height=54 width=280>
         <div id="nav-buttons-container">
             <a class="button-shadow" href="/art">
                 <div class="nav-button">
@@ -73,14 +73,14 @@
                 </a>
                 <a href="/misc.html">more...</a>
             </div>
-            <div class="vertical";>
+            <div class="vertical" style="min-width: 0;">
                 <div style="position: relative;">
                     <span id="splash-text">i support your decision to disallow javascript</span>
                 </div>
-                <div class="window" id="better-on-desktop">
-                    <h3>better on desktop!</h3>
+                <div class="window" id="better-on-desktop" style="min-width: 0;">
+                    <h4 style="color: var(--bgbase); background-color: #a2a2f2">better on desktop!</h4>
                 </div>
-                <div class="window" id="main-window">
+                <div class="window" id="main-window" style="min-width: 0;">
                     <img height=188 id="mascott" src="graphics/mascott.png">
                     <!--
                     <h1>home page</h1>
@@ -88,7 +88,7 @@
                         <img src="graphics/arch-chan.png" alt="milo's webbed site" width=160>
                     </div>
                     -->
-                    <h3>welcome!</h3>
+                    <h4>welcome!</h4>
                     <p style="width: 350px;">
                         I'm milo and this is my homepage.
                         <br>
@@ -102,22 +102,11 @@
                     <p>
                     <a href="https://github.com/milo256/milobit.net">source code for this website</a>
                     </p>
-                    <div id="badgebox">
-                        <i>hotlink my button!</i>
-                        <div class="horizontal" style="height: 31px;">
-                            <a href='/'><img src='/badge.gif'></a>
-                            <div id="badgecode"><span>&lta href='https://milobit.net'>&ltimg src='https://milobit.net/badge.gif'>&lt/a></span></div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-        </div>
-        <div id="lower-split" class="horizontal align-start">
-            <div class="vertical" style="width: 220px; flex: 0 0 auto;">
-                <div class="window">
-                    <h1>web friends</h1>
-                    <div class="badgescroller" title="hint: shift + scrollwheel"> 
-                        <div id="badges" class="badges">
+                <div id="lower-split" class="horizontal align-start" style="min-width: 0;">
+                    <div id="web-friends" class="window">
+                        <h4>web friends :)</h4>
+                        <div id="badges">
                             <a href='https://insect.christmas'><img src='/graphics/insect.christmasbutton.jpg'></a>
                             <a href='https://pink-luva.neocities.org/'><img src='/graphics/ae.jpg'></a>
                             <a href='https://darkuss.twoexem.com/'><img src='/graphics/delta_banner.png'></a>
@@ -127,19 +116,25 @@
                             <a href="https://cow.nekoweb.org/"><img src="https://cow.nekoweb.org/button.gif"></a>
                             <a href="https://equisett.nekoweb.org/"><img src="https://equisett.nekoweb.org/assets/images/button-equisett.png"></a>
                         </div>
+                        <!--
+                        <h4>hotlink my button!</h4>
+                        <div class="horizontal" style="height: 31px; min-width: 0;">
+                            <a href='/'><img src='/badge.gif'></a>
+                            <div id="badgecode"><span>&lta href='https://milobit.net'>&ltimg src='https://milobit.net/badge.gif'>&lt/a></span></div>
+                            
+                        </div>
+                        -->
+                    </div>
+                    <div id="about-me" class="window">
+                        <h4>about me</h4>
+                        <br>
+                        <b>pronouns</b> he/him<br>
+                        <b>uptime</b> 21 yrs<br>
+                        <b>vehicle</b> volvo 245<br>
+                        <b>os</b> arch linux<br>
+                        <b>text editor</b> nvim<br>
                     </div>
                 </div>
-                <div class="window">
-                    <h1>about me</h1>
-                    <b>pronouns:</b> he/him<br>
-                    <b>location:</b> USA<br>
-                    <b>uptime:</b> 21 yrs<br>
-                    <b>vehicle:</b> volvo 245<br>
-                    <b>OS:</b> arch linux<br>
-                    <b>text editor:</b> neovim<br>
-                </div>
-            </div>
-            <div class="vertical" style="width: 100%;">
             </div>
         </div>
     </div>
@@ -188,9 +183,8 @@
         border-bottom: 1px solid var(--borderl);
     }
 
-    #main-window {
-        padding-top: 8px;
-        padding-bottom: 0px;
+    .window {
+        padding: 6px;
     }
 
     #mascott {
@@ -211,17 +205,22 @@
     #nav-buttons-container {
         display: flex;
         flex-direction: row;
-        left: 0px;
-        top: 20px;
         /*transform: translate(80px, -120px);*/
+    }
+    #nav-buttons-container .button-shadow {
     }
     .nav-button {
         text-align: left;
         box-sizing: border-box;
-        padding: 2px 8px 16px;
+        padding: 2px 8px 12px;
         background-color: var(--bgdark);
         transition: transform 0.1s linear;
         border: 1px solid var(--borderl);
+    }
+    .button-shadow:hover > .nav-button {
+        transform: translate(-4px, -4px);
+        text-shadow: 1px 1px 0px var(--shadewin);
+        /*background-image: linear-gradient(0deg,rgba(26, 27, 33, 0.62) 0%, rgba(59, 66, 82, 0) 21%, rgba(205, 237, 172, 0.11) 57%, rgba(209, 242, 175, 0.27) 95%, rgba(245, 255, 235, 0.77) 100%);*/
     }
     .button-shadow:nth-child(1) .nav-button {
         border-left: 8px solid #d1f2af;
@@ -257,8 +256,8 @@
         position: absolute;
         width: 200px;
         text-align: center;
-        right: -40px;
-        top: 20px;
+        right: -30px;
+        top: 50px;
         rotate: -20deg;
         animation-name: splash;
         animation-duration: 0.4s;
@@ -278,37 +277,24 @@
         to { transform: translateX(-200%); }
     }
 
-    .badgescroller::-webkit-scrollbar { display: none; }
-
-    .badgescroller {
-        height: 31px;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        scrollbar-width: none;
-        border-right: 1px solid var(--borderl);
+    #about-me {
+        min-width: 160px;
     }
-    
-    .badges {
+
+    #web-friends {
+        min-width: 0;
+    }
+
+    #badges {
         display: flex;
+        flex-wrap: wrap;
+        min-width: 0;
+        max-height: 120px;
+        overflow: scroll;
+        background-image: url("graphics/bgd.png");
+        padding-bottom: 8px;
+        height: 104px;
     }
-    
-    .badgescroller:not(:hover) {
-        overflow: hidden;
-    }
-    
-
-    .badgescroller:not(:hover) > .badges > *  {
-        animation: slide-across 10s alternate linear infinite;
-    }
-
-    .fakebadge {
-        width: 88px;
-        line-height: 12px;
-        height: 31px;
-        box-sizing: border-box;
-        border: 1px solid var(--texta);
-    }
-
     
     .squarish-button {
         position: relative;
@@ -361,10 +347,12 @@
         to {rotate: 180deg}
     }
 
-    #badgebox {
+    h4 {
+        margin: 0;
         background-color: #20242D;
         color: #b8bec9;
-        padding-bottom: 1px;
+        font-style: italic;
+        font-weight: normal;
     }
 
     #badgecode::-webkit-scrollbar { display: none; }
@@ -372,10 +360,11 @@
     #badgecode {
         height: 32px;
         scrollbar-width: none;
-        background-color: var(--bgdarker);
+        background-image: url("graphics/bgd.png");
+        padding-left: 4px;
         color: var(--borderl);
-        opacity: 80%;
         overflow: hidden;
+        padding-bottom: 1px;
     }
     #badgecode:not(:hover) {
         overflow: hidden;
@@ -394,6 +383,7 @@
         }
         #lower-split {
             flex-direction: column-reverse;
+            align-items: stretch;
         }
         #lower-buttons-container {
             width: 100%;
