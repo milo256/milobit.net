@@ -96,15 +96,27 @@
                         my artwork updated regularly. Refresh the page to change the splash text!
                     </p>
                     <br>
-                    <p>
-                    <a href="https://milobyte.atabook.org">sign the guestbook!</a>
-                    </p>
-                    <p>
-                    <a href="https://github.com/milo256/milobit.net">source code for this website</a>
-                    </p>
+                    <div class="horizontal" id="main-window-lower-section">
+                        <div style="text-wrap: nowrap;">
+                            <p>
+                            <a href="https://milobyte.atabook.org">sign the guestbook!</a>
+                            </p>
+                            <p>
+                            <a href="https://github.com/milo256/milobit.net">source code for this website</a>
+                            </p>
+                        </div>
+                        <div class="window" id="my-button"> 
+                            <h4>hotlink my button!</h4>
+                            <div class="horizontal" style="height: 31px; min-width: 0;">
+                                <a href='/'><img src='/badge.gif'></a>
+                                <div id="badgecode"><span>&lta href='https://milobit.net'>&ltimg src='https://milobit.net/badge.gif'>&lt/a></span></div>
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id="lower-split" class="horizontal align-start" style="min-width: 0;">
-                    <div id="web-friends" class="window">
+                    <div class="window">
                         <h4>web friends :)</h4>
                         <div id="badges">
                             <a href='https://insect.christmas'><img src='/graphics/insect.christmasbutton.jpg'></a>
@@ -116,23 +128,12 @@
                             <a href="https://cow.nekoweb.org/"><img src="https://cow.nekoweb.org/button.gif"></a>
                             <a href="https://equisett.nekoweb.org/"><img src="https://equisett.nekoweb.org/assets/images/button-equisett.png"></a>
                         </div>
-                        <!--
-                        <h4>hotlink my button!</h4>
-                        <div class="horizontal" style="height: 31px; min-width: 0;">
-                            <a href='/'><img src='/badge.gif'></a>
-                            <div id="badgecode"><span>&lta href='https://milobit.net'>&ltimg src='https://milobit.net/badge.gif'>&lt/a></span></div>
-                            
-                        </div>
-                        -->
                     </div>
                     <div id="about-me" class="window">
                         <h4>about me</h4>
                         <br>
                         <b>pronouns</b> he/him<br>
                         <b>uptime</b> 21 yrs<br>
-                        <b>vehicle</b> volvo 245<br>
-                        <b>os</b> arch linux<br>
-                        <b>text editor</b> nvim<br>
                     </div>
                 </div>
             </div>
@@ -277,12 +278,22 @@
         to { transform: translateX(-200%); }
     }
 
-    #about-me {
-        min-width: 160px;
+    #main-window-lower-section {
+        flex-direction: horizontal;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        column-gap: 24px;
     }
 
-    #web-friends {
-        min-width: 0;
+    #my-button {
+        box-shadow: none;
+        border-color: #d1f2af;
+        width: 180px;
+        flex-grow: 1;
+    }
+
+    #about-me {
+        min-width: 160px;
     }
 
     #badges {
@@ -292,7 +303,7 @@
         max-height: 120px;
         overflow: scroll;
         background-image: url("graphics/bgd.png");
-        padding-bottom: 8px;
+        padding-bottom: 6px;
         height: 104px;
     }
     
