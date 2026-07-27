@@ -110,7 +110,6 @@
                             <div class="horizontal" style="height: 31px; min-width: 0;">
                                 <a href='/'><img src='/badge.gif'></a>
                                 <div id="badgecode"><span>&lta href='https://milobit.net'>&ltimg src='https://milobit.net/badge.gif'>&lt/a></span></div>
-                                
                             </div>
                         </div>
                     </div>
@@ -302,19 +301,10 @@
         display: flex;
         flex-wrap: wrap;
         min-width: 0;
-        max-height: 120px;
-        overflow: scroll;
         background-image: url("graphics/bgd.png");
         padding-bottom: 8px;
-        height: 104px;
     }
 
-    /*
-    #badges img, #my-button img {
-        image-rendering: crisp-edges;
-    }
-    */
-    
     .squarish-button {
         position: relative;
         text-align: left;
@@ -374,19 +364,22 @@
         font-weight: normal;
     }
 
-    #badgecode::-webkit-scrollbar { display: none; }
-
     #badgecode {
         height: 32px;
-        scrollbar-width: none;
-        background-image: url("graphics/bgd.png");
-        padding-left: 4px;
-        color: var(--borderl);
         overflow: hidden;
         padding-bottom: 1px;
     }
-    #badgecode:not(:hover) {
-        overflow: hidden;
+    #badgecode span {
+        display: block;
+        position: relative;
+        background-image: url("graphics/bgd.png");
+        padding-left: 4px;
+        padding-bottom: 1px;
+        color: var(--borderl);
+        z-index: 1;
+    }
+    #badgecode:hover {
+        overflow: visible;
     }
 
     @media screen and (max-width: 540px) {
