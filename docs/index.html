@@ -115,18 +115,23 @@
                     </div>
                 </div>
                 <div id="lower-split" class="horizontal align-start" style="min-width: 0;">
-                    <div class="window">
-                        <h4>web friends :)</h4>
-                        <div id="badges">
-                            <a href='https://insect.christmas'><img src='/graphics/insect.christmasbutton.jpg'></a>
-                            <a href='https://pink-luva.neocities.org/'><img src='/graphics/ae.jpg'></a>
-                            <a href='https://darkuss.twoexem.com/'><img src='/graphics/delta_banner.png'></a>
-                            <a href='https://eggno.gg'><img src='graphics/eggnog.png'></a>
-                            <a href='https://notfuji.neocities.org'><img src='/graphics/notfuji.gif'></a>
-                            <a href='https://home.illuc.xyz'><img src='/graphics/illuc.gif'></a>
-                            <a href='https://cow.nekoweb.org/'><img src='https://cow.nekoweb.org/button.gif'></a>
-                            <a href='https://equisett.nekoweb.org/'><img src='https://equisett.nekoweb.org/assets/images/button-equisett.png'></a>
-                            <a href='https://zvava.org'><img src='/graphics/zvava.org.png'></a>
+                    <div id="web-friends">
+                        <i>web friends :)</i>
+                        <div class="badges-container">
+                            <div id="badges" class="badges-content">
+                                <a href='https://insect.christmas'><img src='/graphics/insect.christmasbutton.jpg'></a>
+                                <a href='https://pink-luva.neocities.org/'><img src='/graphics/ae.jpg'></a>
+                                <a href='https://darkuss.twoexem.com/'><img src='/graphics/delta_banner.png'></a>
+                                <a href='https://eggno.gg'><img src='graphics/eggnog.png'></a>
+                                <a href='https://notfuji.neocities.org'><img src='/graphics/notfuji.gif'></a>
+                                <a href='https://home.illuc.xyz'><img src='/graphics/illuc.gif'></a>
+                                <a href='https://cow.nekoweb.org/'><img src='https://cow.nekoweb.org/button.gif'></a>
+                                <a href='https://equisett.nekoweb.org/'><img src='https://equisett.nekoweb.org/assets/images/button-equisett.png'></a>
+                                <a href='https://zvava.org'><img src='/graphics/zvava.org.png'></a>
+                            </div>
+                            <!-- div class="badges-content">
+                                (ADDED BY SCRIPT)
+                            </div --!>
                         </div>
                     </div>
                     <div id="about-me" class="window">
@@ -163,7 +168,6 @@
         }
     }
 
-
     // randomize order of badges
     badgesArray = Array.from(badges.children);
 
@@ -173,6 +177,9 @@
     for (var i = 0; i < badgesArray.length; i++) {
         badges.appendChild(badgesArray[i]);
     }
+    badges_content = badges.cloneNode(true);
+    badges_content.id = "";
+    badges.after(badges_content);
 </script>
 <script src="quiz.js"></script>
 <style>
@@ -297,12 +304,24 @@
         min-width: 160px;
     }
 
-    #badges {
-        display: flex;
-        flex-wrap: wrap;
+    #web-friends {
+        margin: 4px;
+        max-width: 320px;
+        width: auto;
+        flex: 1 1 auto;
+        text-align: left;
         min-width: 0;
+        overflow: hidden;
         background-image: url("graphics/bgd.png");
-        padding-bottom: 8px;
+    }
+
+    .badges-container {
+        display: flex;
+        mask-image: linear-gradient(to right, transparent, black 5% 95%, transparent);
+    }
+    .badges-content {
+        display: flex;
+        animation: marquee 20s linear infinite;
     }
 
     .squarish-button {
@@ -355,6 +374,10 @@
         from {rotate: -180deg}
         to {rotate: 180deg}
     }
+    @keyframes marquee {
+        from {transform: translateX(0%)}
+        to {transform: translateX(-100%)}
+    }
 
     h4 {
         margin: 0;
@@ -398,10 +421,6 @@
             height: 0;
             margin-bottom: -20px;
         }
-        #lower-split {
-            flex-direction: column-reverse;
-            align-items: stretch;
-        }
         #lower-buttons-container {
             width: 100%;
             position: static;
@@ -418,6 +437,12 @@
         }
         #better-on-desktop {
             display: block;
+        }
+    }
+    @media screen and (max-width: 440px) {
+        #lower-split {
+            flex-direction: column-reverse;
+            align-items: stretch;
         }
     }
 </style>
