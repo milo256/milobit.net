@@ -3,23 +3,27 @@
   "resource_dir": "post-resources",
   "catalog": [
     {
+      "id": 0,
       "title": "hatsune miku",
       "design": "miku",
       "created": "2023/12",
       "image": "miku.png"
     },
     {
+      "id": 1,
       "title": "this god won't forgive you",
       "design": "signalis/falke",
       "created": "2024/5",
       "image": "falke.png"
     },
     {
+      "id": 2,
       "design": "original",
       "created": "2024/10",
       "image": "girl.png"
     },
     {
+      "id": 3,
       "title": "saab gripen",
       "design": "nonfiction",
       "created": "2024/10",
@@ -28,24 +32,28 @@
       ]
     },
     {
+      "id": 4,
       "title": "estel photon 2xr",
       "design": "original",
       "created": "2024/11",
       "image": "photon2xr3.png"
     },
     {
+      "id": 5,
       "title": "amber oc",
       "design": "original/amber",
       "created": "2024/12",
       "image": "amber.png"
     },
     {
+      "id": 6,
       "title": "amber piloting",
       "design": "original/amber",
       "created": "2025/1",
       "image": "amber2.png"
     },
     {
+      "id": 7,
       "title": "lr7 turbine pheonix",
       "design": "original",
       "created": "2025/2",
@@ -53,97 +61,112 @@
       "images": [ "lr7.png", "lr7banner.png", "lr73d.png" ]
     },
     {
+      "id": 8,
       "title": "spaceship 01",
       "design": "original",
       "created": "2025/2",
       "image": "ship1.png"
     },
     {
+      "id": 9,
       "title": "spaceship 02",
       "design": "original",
       "created": "2025/2",
       "image": "ship2.png"
     },
     {
+      "id": 10,
       "title": "spaceship 03",
       "design": "original",
       "created": "2025/2",
       "image": "ship3.png"
     },
     {
+      "id": 11,
       "title": "spaceship 04",
       "design": "original",
       "created": "2025/2",
       "image": "ship4.png"
     },
     {
+      "id": 12,
       "title": "exploration",
       "design": "original",
       "created": "2025/2",
       "image": "exploration.png"
     },
     {
+      "id": 13,
       "title": "robot girl",
       "design": "original",
       "created": "2025/2",
       "images": [ "robotgirl.png", "robotgirl2.png" ]
     },
     {
+      "id": 14,
       "title": "icewar soldiers",
       "design": "original",
       "created": "2025/4",
       "image": "europa-icewar.png"
     },
     {
+      "id": 15,
       "design": "original/caroline",
       "created": "2025/4",
       "updated": "2025/7",
       "image": "dg3.png"
     },
     {
+      "id": 16,
       "title": "variable geometry fighter",
       "design": "original",
       "created": "2025/5",
       "image": "transform.png"
     },
     {
-
+      "id": 17,
       "title": "racing ship",
       "design": "original",
       "created": "2025/6",
       "image": "racing_ship.png"
     },
     {
+      "id": 18,
       "title": "caroline refsheet",
       "design": "original/caroline",
       "created": "2025/7",
       "image": "caroline.png"
     },
     {
+      "id": 19,
       "title": "spaceship 05",
       "design": "original",
       "created": "2025/7",
       "image": "drawpile_ship.png"
     },
     {
+      "id": 20,
       "title": "combat doll",
       "design": "original",
       "created": "2025/7",
       "image": "doll2.png"
     },
     {
+      "id": 21,
       "title": "southern pacific A-12",
       "design": "nonfiction",
       "created": "2025/10",
       "image": "cabforward.png"
     },
     {
+      "id": 22,
       "title": "cozy robot",
       "design": "original",
       "created": "2025/10",
       "image": "cozy.png"
     },
     {
+      "id": 23,
       "title": "XL orbital lift",
       "design": "original",
       "created": "2026/4",
