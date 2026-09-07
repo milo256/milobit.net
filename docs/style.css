@@ -4,6 +4,10 @@
     --texta: #88c0d0;
     --texts: #ebcb8b;
     --textl: #b8bec9;
+    --green: #d1f2af;
+    --blue: #a1c9f1;
+    --purple: #a2a2f2;
+    --red: #f79a96;
     --borderl: #4c566a;
     --bglight: #3b4252;
     --bgbase: #2e3440;
@@ -38,21 +42,25 @@
     position: absolute;
     right: 100%;
 }
+
 #top-bar h3 {
     color: var(--textl);
 }
+
 .top-bar-separator {
     display: inline-block;
     width: 1px;
     height: 100%;
     background-color: var(--borderl);
 }
+
 .top-bar-button-group {
     display: flex;
     height: 100%;
     gap: 6px;
     align-items: center;
 }
+
 #top-bar-buttons {
     position: relative;
     display: flex;
@@ -62,6 +70,7 @@
     max-width: 432px;
     justify-content: space-between;
 }
+
 @media screen and (max-width: 540px) {
     #top-bar-buttons {
         padding-left: 8px;
@@ -98,10 +107,6 @@ h1, h2 {
     text-transform: uppercase;
     text-wrap: nowrap;
 }
-/*
-h1::before, h2::before { content: "-- "; }
-h1::after, h2::after { content: " --"; }
-*/
 
 h1 {
     color: var(--texta);
@@ -116,6 +121,14 @@ h1.inline, h2.inline {
 h3 {
     color: var(--textp);
     font-style: bold;
+}
+
+h4 {
+    margin: 0;
+    background-color: var(--bgdark);
+    color: var(--textl);
+    font-style: italic;
+    font-weight: normal;
 }
 
 a {
@@ -160,34 +173,6 @@ a:hover { text-decoration-line: underline; }
     box-shadow: 5px 5px var(--shadebase);
 }
 
-
-.button-shadow {
-    margin: 8px 0px 0px 8px;
-    display: inline-block;
-    flex: 0 0 auto;
-    position: relative;
-    background-color: var(--shadebase);
-    /*box-shadow: 5px 5px var(--shadebase);*/
-}
-
-.button-shadow > * {
-    margin: -4px 4px 4px -4px;
-}
-
-.button-shadow:hover {
-    text-decoration: none;
-}
-
-.button-shadow:hover .squarish-button {
-    transform: translate(-4px, -4px);
-    animation: rock 1s -0.5s alternate linear infinite;
-}
-
-.button-shadow:hover .bouncer {
-    animation: bob 0.5s -0.5s alternate ease-out infinite;
-}
-
-
 .hnav {
     overflow: scroll;
     text-wrap: nowrap;
@@ -219,22 +204,6 @@ a:hover { text-decoration-line: underline; }
     position: absolute;
     padding: 0 8px;
     background-color: var(--bgdark);
-}
-
-#picture-frame {
-    background-color: var(--bga);
-    border: 1px solid var(--borderbga);
-    box-shadow: 3px 3px var(--shadewin);
-    margin: 12px 8px;
-    padding: 6px;
-    display: inline-block;
-    rotate: 4deg;
-}
-
-#picture-frame > img {
-    background-color: var(--bgac);
-    border: 1px solid var(--borderbga);
-    margin-bottom: -3px;
 }
 
 #gallery-wrapper {

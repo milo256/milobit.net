@@ -138,26 +138,20 @@
                         </div>
                     </div>
                 </div>
-                <div id="lower-split" class="horizontal align-start" style="min-width: 0;">
-                    <div class="vertical web-friends">
-                        <i>also check out:</i>
-                        <div class="badges-container">
-                            <div class="badges", style="animation-direction: reverse;">
-                                <a href="https://corru.observer"><img src="/graphics/corru-observer.gif"></a>
-                                <a href="https://sweetfish.site"><img src="/graphics/sweetfish.png"></a>
-                                <a href="https://melankorin.net"><img src="https://melankorin.net/assets/img/buttons/button-1.gif"></a>
-                                <a href="https://iczelia.net"><img src="/graphics/iczelia.gif"></a>
-                                <a href="https://millmint.net"><img src="/graphics/millmint.png"></a>
-                            </div>
-                            <!-- div class="badges">
-                                (ADDED BY SCRIPT)
-                            </div --!>
+                <div class="vertical web-friends">
+                    <i>also check out:</i>
+                    <div class="badges-container">
+                        <div class="badges", style="animation-direction: reverse;">
+                            <a href="https://corru.observer"><img src="/graphics/corru-observer.gif"></a>
+                            <a href="https://sweetfish.site"><img src="/graphics/sweetfish.png"></a>
+                            <a href="https://melankorin.net"><img src="https://melankorin.net/assets/img/buttons/button-1.gif"></a>
+                            <a href="https://iczelia.net"><img src="/graphics/iczelia.gif"></a>
+                            <a href="https://millmint.net"><img src="/graphics/millmint.png"></a>
                         </div>
+                        <!-- div class="badges">
+                            (ADDED BY SCRIPT)
+                        </div --!>
                     </div>
-                    <!--
-                    <div id="about-me" class="window">
-                    </div>
-                    --!>
                 </div>
             </div>
         </div>
@@ -208,17 +202,8 @@
 </script>
 <script src="quiz.js"></script>
 <style>
-    #logo {
-        margin-top: -5px;
-    }
-
     #top-banner {
         border-bottom: 1px solid var(--borderl);
-    }
-
-    #main-window {
-        min-width: 0;
-        max-width: 480px;
     }
 
     #mascott {
@@ -227,22 +212,26 @@
         right: 0px;
         top: -156px;
     }
+    
+    #better-on-desktop {
+        background-color: var(--bglight);
+        display: none;
+    }
+    
+    #main-window {
+        min-width: 0;
+        max-width: 480px;
+    }
 
     #side-buttons-container {
         margin-top: 0;
     }
 
-    #lower-split {
-        position: relative;
-    }
-
     #nav-buttons-container {
         display: flex;
         flex-direction: row;
-        /*transform: translate(80px, -120px);*/
     }
-    #nav-buttons-container .button-shadow {
-    }
+
     .nav-button {
         text-align: left;
         box-sizing: border-box;
@@ -250,111 +239,10 @@
         background-color: var(--bgdark);
         transition: transform 0.1s linear;
         border: 1px solid var(--borderl);
-    }
-    .button-shadow:hover > .nav-button {
-        transform: translate(-4px, -4px);
-        text-shadow: 1px 1px 0px var(--shadewin);
-        /*background-image: linear-gradient(0deg,rgba(26, 27, 33, 0.62) 0%, rgba(59, 66, 82, 0) 21%, rgba(205, 237, 172, 0.11) 57%, rgba(209, 242, 175, 0.27) 95%, rgba(245, 255, 235, 0.77) 100%);*/
-    }
-    .button-shadow:nth-child(1) .nav-button {
-        border-left: 8px solid #d1f2af;
-        color: #d1f2af;
-    }
-    .button-shadow:nth-child(2) .nav-button {
-        border-left: 8px solid #a1c9f1;
-        color: #a1c9f1;
-    }
-    .button-shadow:nth-child(3) .nav-button {
-        border-left: 8px solid #a2a2f2;
-        color: #a2a2f2;
-    }
-    .button-shadow:nth-child(4) .nav-button {
-        border-left: 8px solid #f79a96;
-        color: #f79a96;
-    }
-
-    #better-on-desktop {
-        background-color: var(--bglight);
-        display: none;
+        border-left: 8px solid var(--nav-button-color);
+        color: var(--nav-button-color);
     }
     
-
-    #splash-text a {
-        color: #d1f2af;
-    }
-
-    #splash-text {
-        z-index: 1;
-        color: #d1f2af;
-        display: inline-block;
-        position: absolute;
-        width: 180px;
-        text-align: center;
-        right: -38px;
-        top: 20px;
-        transform: rotate(-20deg);
-        animation-name: splash;
-        animation-duration: 0.4s;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-        animation-timing-function: ease-in;
-    }
-
-
-    @keyframes splash {
-        from { scale: 1.0 }
-        to { scale: 1.08 }
-    }
-
-    @keyframes slide-across {
-        from { transform: none; }
-        to { transform: translateX(-200%); }
-    }
-
-    #main-window-lower-section {
-        flex-direction: horizontal;
-        flex-wrap: wrap;
-        align-items: start;
-        justify-content: space-between;
-        column-gap: 24px;
-    }
-
-    #my-button {
-        box-shadow: none;
-        border: 1px solid #d1f2af;
-        background-color: var(--bgdarker);
-        transform: translate(14px, 16px) rotate(-4deg);
-        box-shadow: 3px 3px var(--shadebase);
-        padding: 6px;
-        width: 180px;
-        flex-grow: 1;
-    }
-
-    #about-me {
-        min-width: 160px;
-    }
-
-    .web-friends {
-        margin: 4px;
-        width: auto;
-        text-align: left;
-        min-width: 0;
-        background-image: url("graphics/bgd.png");
-    }
-
-    .badges-container {
-        display: flex;
-        overflow: hidden;
-        mask-image: linear-gradient(to right, transparent, black 20% 80%, transparent);
-    }
-    .badges {
-        display: flex;
-        animation: marquee 20s linear infinite;
-    }
-    .badges-reverse-direction {
-        animation: marquee 20s linear infinite;
-    }
-
     .squarish-button {
         position: relative;
         text-align: left;
@@ -365,6 +253,67 @@
         transition: transform 0.1s linear;
     }
 
+    .button-shadow {
+        margin: 8px 0px 0px 8px;
+        display: inline-block;
+        flex: 0 0 auto;
+        position: relative;
+        background-color: var(--shadebase);
+    }
+
+    .button-shadow > * {
+        margin: -4px 4px 4px -4px;
+    }
+
+    .button-shadow:hover {
+        text-decoration: none;
+    }
+
+    .button-shadow:hover .squarish-button {
+        transform: translate(-4px, -4px);
+        animation: rock 1s -0.5s alternate linear infinite;
+    }
+
+    .button-shadow:hover .bouncer {
+        animation: bob 0.5s -0.5s alternate ease-out infinite;
+    }
+
+    .button-shadow:hover > .nav-button {
+        transform: translate(-4px, -4px);
+        text-shadow: 1px 1px 0px var(--shadewin);
+    }
+
+    .button-shadow:nth-child(1) .nav-button {
+        --nav-button-color: var(--green);
+    }
+
+    .button-shadow:nth-child(2) .nav-button {
+        --nav-button-color: var(--blue);
+    }
+
+    .button-shadow:nth-child(3) .nav-button {
+        --nav-button-color: var(--purple);
+    }
+
+    .button-shadow:nth-child(4) .nav-button {
+        --nav-button-color: var(--red);
+    }
+
+    @keyframes bob {
+        from {transform: translateY(2px)}
+        to {transform: translateY(-2px)}
+    }
+
+    @keyframes rock {
+        from {rotate: -4deg}
+        to {rotate: 4deg}
+    }
+
+    @keyframes spin {
+        from {rotate: -180deg}
+        to {rotate: 180deg}
+    }
+    
     #bluesky {
         background-color: var(--bgac);
         color: #4682B4
@@ -386,43 +335,38 @@
 
     #fediverse {
         padding: 4px 0px 0px 4px;
-        background-color: #121212;
+        background-color: var(--shadebase);
     }
 
     #fediverse > img {
         animation: spin 18s linear infinite;
     }
-
-    @keyframes bob {
-        from {transform: translateY(2px)}
-        to {transform: translateY(-2px)}
-    }
-    @keyframes rock {
-        from {rotate: -4deg}
-        to {rotate: 4deg}
-    }
-    @keyframes spin {
-        from {rotate: -180deg}
-        to {rotate: 180deg}
-    }
-    @keyframes marquee {
-        from {transform: translateX(0%)}
-        to {transform: translateX(-100%)}
+    
+    #main-window-lower-section {
+        flex-direction: horizontal;
+        flex-wrap: wrap;
+        align-items: start;
+        justify-content: space-between;
+        column-gap: 24px;
     }
 
-    h4 {
-        margin: 0;
-        background-color: #20242D;
-        color: #b8bec9;
-        font-style: italic;
-        font-weight: normal;
+    #my-button {
+        box-shadow: none;
+        border: 1px solid var(--green);
+        background-color: var(--bgdarker);
+        transform: translate(14px, 16px) rotate(-4deg);
+        box-shadow: 3px 3px var(--shadebase);
+        padding: 6px;
+        width: 180px;
+        flex-grow: 1;
     }
-
+    
     #badgecode {
         height: 32px;
         overflow: hidden;
         padding-bottom: 1px;
     }
+
     #badgecode span {
         display: block;
         position: relative;
@@ -432,51 +376,90 @@
         color: var(--borderl);
         z-index: 1;
     }
+
+    .web-friends {
+        margin: 4px;
+        width: auto;
+        text-align: left;
+        min-width: 0;
+        background-image: url("graphics/bgd.png");
+    }
+
+    .badges-container {
+        display: flex;
+        overflow: hidden;
+        height: 31px;
+        mask-image: linear-gradient(to right, transparent, black 20% 80%, transparent);
+    }
+
+    .badges {
+        display: flex;
+        animation: marquee 20s linear infinite;
+    }
+
+    @keyframes marquee {
+        from {transform: translateX(0%)}
+        to {transform: translateX(-100%)}
+    }
+
     #badgecode:hover {
         overflow: visible;
     }
+    
+    #splash-text a {
+        color: var(--green);
+    }
+
+    #splash-text {
+        z-index: 1;
+        color: var(--green);
+        display: inline-block;
+        position: absolute;
+        width: 180px;
+        text-align: center;
+        right: -38px;
+        top: 20px;
+        transform: rotate(-20deg);
+        animation: splash 0.4s ease-in infinite alternate;
+    }
+
+    @keyframes splash {
+        from { scale: 1.0 }
+        to { scale: 1.08 }
+    }
 
     @media screen and (max-width: 540px) {
-        #splash-text {
-            rotate: 10deg;
-            right: 20px;
-            top: -80px;
-        }
-        #side-buttons-container {
-            margin-top: 0px;
-        }
-        #mascott {
-            display: none; /* ): */
-        }
         #top-banner {
             height: 0;
             margin-bottom: -20px;
         }
-        #lower-buttons-container {
-            width: 100%;
-            position: static;
-            align-items: stretch;
-            flex-direction: row;
+
+        #mascott {
+            display: none; /* ): */
         }
-        #lower-buttons-container > * {
-            flex: 1 1 auto;
+
+        #better-on-desktop {
+            display: block;
         }
-        #my-button {
-            transform: none;
+
+        #side-buttons-container {
+            margin-top: 0px;
         }
+
         .nav-button {
             max-height: 33px;
             padding-left: 4px;
             word-break: keep-all;
         }
-        #better-on-desktop {
-            display: block;
+        
+        #my-button {
+            transform: none;
         }
-    }
-    @media screen and (max-width: 440px) {
-        #lower-split {
-            flex-direction: column-reverse;
-            align-items: stretch;
+
+        #splash-text {
+            transform: none;
+            right: -5px;
+            top: -115px;
         }
     }
 </style>
