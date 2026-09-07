@@ -17,7 +17,8 @@
 <div id="top-banner"></div>
 <div class="horizontal centered align-start">
     <div class="vertical" style="flex: auto; max-width: 550px; min-width: 0;">
-        <img id="logo" src="graphics/logo.png" height=54 width=280>
+        <!--<img id="logo" src="graphics/logo.png" height=54 width=280>-->
+        <div style="height: 40px"></div>
         <div id="nav-buttons-container">
             <a class="button-shadow" href="/art">
                 <div class="nav-button">
@@ -73,14 +74,32 @@
                 </a>
                 <a href="/misc.html">more...</a>
             </div>
-            <div class="vertical" style="min-width: 0;">
+            <div class="vertical" style="min-width: 0; flex: 1 1 0;">
+                <div class="vertical web-friends">
+                    <div class="badges-container">
+                        <div class="badges">
+                            <a href='https://insect.christmas'><img src='/graphics/insect.christmasbutton.jpg'></a>
+                            <a href='https://pink-luva.neocities.org/'><img src='/graphics/ae.jpg'></a>
+                            <a href='https://darkuss.fyi/'><img src='/graphics/delta_banner.png'></a>
+                            <a href='https://eggno.gg'><img src='graphics/eggnog.png'></a>
+                            <a href='https://notfuji.neocities.org'><img src='/graphics/notfuji.gif'></a>
+                            <a href='https://home.illuc.xyz'><img src='/graphics/illuc.gif'></a>
+                            <a href='https://cow.nekoweb.org/'><img src='https://cow.nekoweb.org/button.gif'></a>
+                            <a href='https://equisett.nekoweb.org/'><img src='https://equisett.nekoweb.org/assets/images/button-equisett.png'></a>
+                            <a href='https://zvava.org'><img src='/graphics/zvava.org.png'></a>
+                        </div>
+                        <!-- div class="badges">
+                            (ADDED BY SCRIPT)
+                        </div --!>
+                    </div>
+                </div>
                 <div style="position: relative;">
                     <span id="splash-text">i support your decision to disallow javascript</span>
                 </div>
                 <div class="window" id="better-on-desktop" style="min-width: 0;">
                     <h4 style="color: var(--bgbase); background-color: #a2a2f2">better on desktop!</h4>
                 </div>
-                <div class="window" id="main-window" style="min-width: 0;">
+                <div class="window" id="main-window">
                     <img height=188 id="mascott" src="graphics/mascott.png">
                     <!--
                     <h1>home page</h1>
@@ -95,9 +114,14 @@
                         On this website you can find links to my socials and a gallery of
                         my artwork updated regularly. Refresh the page to change the splash text!
                     </p>
-                    <br>
+                    <h4>about me</h4>
                     <div class="horizontal" id="main-window-lower-section">
-                        <div style="text-wrap: nowrap;">
+                        <div>
+                            <p>
+                                <b>pronouns</b> he/him<br>
+                                <b>uptime</b> 22 yrs<br>
+                                <b>location</b> &#x1f1f8;&#x1f1ea;<br>
+                            </p>
                             <p>
                             <a href="https://milobyte.atabook.org">sign the guestbook!</a>
                             </p>
@@ -115,32 +139,25 @@
                     </div>
                 </div>
                 <div id="lower-split" class="horizontal align-start" style="min-width: 0;">
-                    <div id="web-friends">
-                        <i>web friends :)</i>
+                    <div class="vertical web-friends">
+                        <i>also check out:</i>
                         <div class="badges-container">
-                            <div id="badges" class="badges-content">
-                                <a href='https://insect.christmas'><img src='/graphics/insect.christmasbutton.jpg'></a>
-                                <a href='https://pink-luva.neocities.org/'><img src='/graphics/ae.jpg'></a>
-                                <a href='https://darkuss.fyi/'><img src='/graphics/delta_banner.png'></a>
-                                <a href='https://eggno.gg'><img src='graphics/eggnog.png'></a>
-                                <a href='https://notfuji.neocities.org'><img src='/graphics/notfuji.gif'></a>
-                                <a href='https://home.illuc.xyz'><img src='/graphics/illuc.gif'></a>
-                                <a href='https://cow.nekoweb.org/'><img src='https://cow.nekoweb.org/button.gif'></a>
-                                <a href='https://equisett.nekoweb.org/'><img src='https://equisett.nekoweb.org/assets/images/button-equisett.png'></a>
-                                <a href='https://zvava.org'><img src='/graphics/zvava.org.png'></a>
+                            <div class="badges", style="animation-direction: reverse;">
+                                <a href="https://corru.observer"><img src="/graphics/corru-observer.gif"></a>
+                                <a href="https://sweetfish.site"><img src="/graphics/sweetfish.png"></a>
+                                <a href="https://melankorin.net"><img src="https://melankorin.net/assets/img/buttons/button-1.gif"></a>
+                                <a href="https://iczelia.net"><img src="/graphics/iczelia.gif"></a>
+                                <a href="https://millmint.net"><img src="/graphics/millmint.png"></a>
                             </div>
-                            <!-- div class="badges-content">
+                            <!-- div class="badges">
                                 (ADDED BY SCRIPT)
                             </div --!>
                         </div>
                     </div>
+                    <!--
                     <div id="about-me" class="window">
-                        <h4>about me</h4>
-                        <br>
-                        <b>pronouns</b> he/him<br>
-                        <b>uptime</b> 22 yrs<br>
-                        <b>location</b> &#x1f1f8;&#x1f1ea;<br>
                     </div>
+                    --!>
                 </div>
             </div>
         </div>
@@ -169,37 +186,45 @@
         }
     }
 
-    // randomize order of badges
-    badgesArray = Array.from(badges.children);
+    var badgeLists = Array.from(document.getElementsByClassName("badges"));
 
-    shuffle(badgesArray);
-    badges.innerHTML = "";
+    console.log(badgeLists.length);
 
-    for (var i = 0; i < badgesArray.length; i++) {
-        badges.appendChild(badgesArray[i]);
+    for (var i = 0; i < badgeLists.length; i++) {
+        console.log(i);
+        var badges = badgeLists[i];
+        badgesArray = Array.from(badges.children);
+
+        shuffle(badgesArray);
+        badges.innerHTML = "";
+
+        for (var j = 0; j < badgesArray.length; j++) {
+            badges.appendChild(badgesArray[j]);
+        }
+        var animationDuration = badgesArray.length * 2.2;
+        badges.style.animationDuration = "" + animationDuration + "s";
+        badges.after(badges.cloneNode(true));
     }
-    badges_content = badges.cloneNode(true);
-    badges_content.id = "";
-    badges.after(badges_content);
 </script>
 <script src="quiz.js"></script>
 <style>
     #logo {
-        margin-top: 30px;
+        margin-top: -5px;
     }
 
     #top-banner {
         border-bottom: 1px solid var(--borderl);
     }
 
-    .window {
-        padding: 6px;
+    #main-window {
+        min-width: 0;
+        max-width: 480px;
     }
 
     #mascott {
         pointer-events: none;
         position: absolute;
-        right: 12px;
+        right: 0px;
         top: -156px;
     }
 
@@ -267,7 +292,7 @@
         text-align: center;
         right: -38px;
         top: 20px;
-        rotate: -20deg;
+        transform: rotate(-20deg);
         animation-name: splash;
         animation-duration: 0.4s;
         animation-iteration-count: infinite;
@@ -289,6 +314,7 @@
     #main-window-lower-section {
         flex-direction: horizontal;
         flex-wrap: wrap;
+        align-items: start;
         justify-content: space-between;
         column-gap: 24px;
     }
@@ -296,6 +322,9 @@
     #my-button {
         box-shadow: none;
         border: 1px solid #d1f2af;
+        background-color: var(--bgdarker);
+        transform: translate(14px, 16px) rotate(-4deg);
+        box-shadow: 3px 3px var(--shadebase);
         padding: 6px;
         width: 180px;
         flex-grow: 1;
@@ -305,23 +334,23 @@
         min-width: 160px;
     }
 
-    #web-friends {
+    .web-friends {
         margin: 4px;
-        max-width: 320px;
         width: auto;
-        flex: 1 1 auto;
         text-align: left;
         min-width: 0;
-        overflow: hidden;
         background-image: url("graphics/bgd.png");
     }
 
     .badges-container {
         display: flex;
-        mask-image: linear-gradient(to right, transparent, black 5% 95%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 20% 80%, transparent);
     }
-    .badges-content {
+    .badges {
         display: flex;
+        animation: marquee 20s linear infinite;
+    }
+    .badges-reverse-direction {
         animation: marquee 20s linear infinite;
     }
 
@@ -430,6 +459,9 @@
         }
         #lower-buttons-container > * {
             flex: 1 1 auto;
+        }
+        #my-button {
+            transform: none;
         }
         .nav-button {
             max-height: 33px;
